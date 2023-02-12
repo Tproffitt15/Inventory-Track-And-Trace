@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--
+    Inventory Track Trace
+-->
+
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+        background-color: rgb(255, 255, 255);
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #B21B1B;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover {
+        background-color: #111;
+    }
+
+    input[type=text],
+    select,
+    textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: vertical;
+    }
+
+    label {
+        padding: 12px 12px 12px 0;
+        display: inline-block;
+    }
+
+    input[type=submit] {
+        background-color: #B21B1B;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        float: right;
+    }
+
+    input[type=submit]:hover {
+        background-color: #B21B1B;
+    }
+
+    .container {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+
+
+    /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 600px) {
+
+        .col-25,
+        .col-75,
+        input[type=submit] {
+            width: 100%;
+            margin-top: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <ul>
+        <li><a class="active" href="createNewOrder.html">Cardinal Health</a></li>
+        <li><a href="orders.html">Orders</a></li>
+        <li><a href="profile.html">Profile</a></li>
+    </ul>
+
+    <h2>Create New Order</h2>
+
+    <div class="container">
+        <form class="form" action="action_page.php" method="post">
+            <div class="row">
+                <label for="orderDetails" class="form-label">Choose Drug</label>
+                <select name="drugs" id="drugs">
+                    <option value="">ibuprofen</option>
+                    <option value="">tylenol</option>
+                </select>
+                <label for="quantity">Quantity (between 1 and 5):</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="5">
+            </div>
+
+            <h4>From Delivery Address</h4>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="dAddress">Address Line 1</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="dAddress" name="dAddress1" placeholder="From Address..">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="dAddress2">Address Line 2 (optional)</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="dAddress2" name="dAddress2" placeholder="From Address..">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="city">City</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="city" name="city">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="state">State</label>
+                </div>
+                <div class="col-75">
+                    <select id="state" name="state">
+                        <option value="indiana">Indiana</option>
+                        <option value="ohio">Ohio</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="city">Zip Code</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="zip" name="zipCode">
+                </div>
+            </div>
+
+            <h4>To Delivery Address</h4>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="taddress">Address Line 1</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="tAddress" name="tAddress1" placeholder="To Address..">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="taddress2">Address Line 2 (optional)</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="tAddress2" name="tAddress2">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="city">City</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="tcity" name="tCity">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="state">State</label>
+                </div>
+                <div class="col-75">
+                    <select id="tstate" name="tState">
+                        <option value="indiana">Indiana</option>
+                        <option value="ohio">Ohio</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="city">Zip Code</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="tzip" name="tZipCode">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="deliveryDate">Deliver By</label>
+                    <input type="date" id="deliveryDate" name="deliveryDate">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-25">
+                    <label for="trackingNum">Tracking #</label>
+                    <input type="number" id="trackingNum" name="trackingNumber" placeholder="9400 1000 0000 0000 00">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="uploadFile">Upload File</label>
+                    <input type="file" id="uploadFile" name="uploadFile">
+                </div>
+            </div>
+
+            <br>
+            <div class="row">
+                <input type="submit" id="submitButton" value="Create Order">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
