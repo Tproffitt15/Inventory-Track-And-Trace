@@ -14,17 +14,21 @@ contract OrderNFT is ERC721 {
 
     Counters.Counter private _orderIds;
 
-    // address payable owner;
-
     enum Location {
         Manufacture,
         Distributor,
         Customer
     }
 
+    enum Status {
+        Action,
+        Done
+    }
+
     struct Order {
         uint256 orderId;
         Location location;
+        Status status;
         address currentOwner;
     }
 
@@ -44,7 +48,7 @@ contract OrderNFT is ERC721 {
         uint256 newOrderId = _orderIds.current();
 
         // Create new order struct
-        Order memory newOrder = Order(newOrderId, Location.Manufacture, msg.sender);
+        Order memory newOrder = Order(newOrderId, Location.Manufacture, Status.Done ,msg.sender);
 
         // Save parties that involves in the transaction
         for (uint256 i = 0; i < addresses.length; i++) {
@@ -90,9 +94,10 @@ contract OrderNFT is ERC721 {
         return orders;
     }
 
-    function transferOwner(uint256 orderId, address to) public {
-        Order memory order = _orders[orderId];
-        _transfer(order.currentOwner, to, orderId);
+    function transferOwner(uint256 orderId, address to, Status _status, Location _location) public {
+        _orders[orderId].status = _status;
+        _orders[orderId].location = _location;
+        _transfer(_orders[orderId].currentOwner, to, orderId);
     }
 
     function _setTokenURI(uint256 tokenId, string memory _tokenURI)
