@@ -5,7 +5,7 @@ const HomepageNavbar = () => {
         <div>
             <ul>
                 <li><a className="active" href="createNewOrder.html">Cardinal Health</a></li>
-                <li><Link to="orders/all">Orders</Link></li>
+                <li><Link to="orders">Orders</Link></li>
                 <li><Link to="profile">Profile</Link></li>
             </ul>
             <Outlet/>

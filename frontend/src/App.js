@@ -29,14 +29,13 @@ return (
             <Route path="/signup" element={<Signup />} />
             <Route path="/connect" element={<ConnectWallet />} />
             <Route path="userId" element={<HomepageNavbar />}>
-                <Route path="profile" element ={<Profile/>}/>
                 <Route path="orders" element={<OrderView/>}/>
                 <Route path="orders/:orderId" element={<OrderDetails/>}/>
-                    {/* <Route path="details" element={<OrderView/>}/>
-                    <Route path="shipping" element={<ShippingInfo/>}/> */}
+                <Route path="profile" element ={<Profile/>}/>
+                <Route path="create-order" element={<CreateOrder />} />
                 <Route path="*" element={<Error />}/>
             </Route>           
-            <Route path="/create-order/" element={<CreateOrder />} />
+            
             {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
             {/* <Route path="*" element={<Error />}/> */}
             <Route path="*" element={<Error />}/>

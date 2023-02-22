@@ -3,12 +3,6 @@ import "./CreateOrder.css"
 const CreateOrder = () => {
     return (
         <section>
-            <ul>
-                <li><a className="active" href="createNewOrder.html">Cardinal Health</a></li>
-                <li><a href="orders.html">Orders</a></li>
-                <li><a href="profile.html">Profile</a></li>
-            </ul>
-
             <h2>Create New Order</h2>
 
             <div className="container">
