@@ -4,13 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Signup from "./pages/Signup"
 import Profile from './pages/Profile';
-import AllOrders from './pages/AllOrders';
 import CreateOrder from "./pages/CreateOrder";
-import IncomingOrders from "./pages/IncomingOrders";
-import ForwardedOrders from "./pages/ForwardedOrders";
 import Error from './pages/Error';
 import HomepageNavbar from './components/HomepageNavbar';
-import OrderNavbar from './components/OrderNavbar';
+import OrderView from './components/OrderView';
+import ConnectWallet from 'pages/ConnectWallet';
+import OrderViewNavbar from 'components/OrderViewNavbar';
+import OrderDetails from 'pages/OrderDetails';
+import ShippingInfo from 'pages/ShippingInfo';
 
 function App() {
 return (
@@ -26,17 +27,15 @@ return (
 
             {/* <Route path="/signin" element={<Signin />} /> */}
             <Route path="/signup" element={<Signup />} />
-            {/* <Route path="/connect/" element={<Connect />} /> */}
-            <Route path="id" element={<HomepageNavbar />}>
+            <Route path="/connect" element={<ConnectWallet />} />
+            <Route path="userId" element={<HomepageNavbar />}>
                 <Route path="profile" element ={<Profile/>}/>
-                <Route path="orders" element={<OrderNavbar/>}>
-                    <Route path="all" element={<AllOrders />} />
-                    <Route path="incoming" element={<IncomingOrders />} />
-                    <Route path="forwarded" element={<ForwardedOrders />} />
-                </Route>
+                <Route path="orders" element={<OrderView/>}/>
+                <Route path="orders/:orderId" element={<OrderDetails/>}/>
+                    {/* <Route path="details" element={<OrderView/>}/>
+                    <Route path="shipping" element={<ShippingInfo/>}/> */}
                 <Route path="*" element={<Error />}/>
             </Route>           
-            {/* <Route path="/order-details/:id" element={<OrderDetail />} /> */}
             <Route path="/create-order/" element={<CreateOrder />} />
             {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
             {/* <Route path="*" element={<Error />}/> */}

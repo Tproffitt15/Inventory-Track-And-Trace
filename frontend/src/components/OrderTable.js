@@ -1,4 +1,5 @@
 import orderData from "data/orders.json"
+import "./OrderTable.css"
 
 function OrderTable({ filter }) {
     const getHeadings = () => {
