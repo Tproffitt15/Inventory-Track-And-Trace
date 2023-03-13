@@ -1,3 +1,5 @@
+import {Link, Outlet} from "react-router-dom"
+
 import "./Signup.css"
 
 const Signup = () => {
@@ -53,7 +55,7 @@ const Signup = () => {
                     </div>
                     <br></br>
                     <div className="row">
-                        <input type="submit" id="submitButton" value="Next step"></input>
+                        <button><Link to="connect" id="submitButton">Next Step</Link></button>
                     </div>
                 </form>
             </div>

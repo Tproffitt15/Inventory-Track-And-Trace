@@ -1,6 +1,8 @@
 import './App.css';
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Web3ReactProvider } from '@web3-react/core'
+import Web3 from 'web3'
 
 import Signup from "./pages/Signup"
 import Profile from './pages/Profile';
@@ -14,35 +16,41 @@ import OrderDetails from 'pages/OrderDetails';
 import ShippingInfo from 'pages/ShippingInfo';
 
 function App() {
-return (
-    <BrowserRouter>
-        <Routes>
-            {/* Route placeholder */}
-            {/* will later add nested routes for each role 
-                example: distributor/:id/profile
-                        distributor/:id/all-orders
-                        etc.
-            */}
-            
+    function getLibrary(provider) {
+        return new Web3(provider)
+    }
+    return (
+        <Web3ReactProvider getLibrary={getLibrary}>
+        
+            <BrowserRouter>
+                <Routes>
+                    {/* Route placeholder */}
+                    {/* will later add nested routes for each role 
+                        example: distributor/:id/profile
+                                distributor/:id/all-orders
+                                etc.
+                    */}
+                    
 
-            {/* <Route path="/signin" element={<Signin />} /> */}
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/connect" element={<ConnectWallet />} />
-            <Route path="userId" element={<HomepageNavbar />}>
-                <Route path="orders" element={<OrderView/>}/>
-                <Route path="orders/:orderId" element={<OrderDetails/>}/>
-                <Route path="profile" element ={<Profile/>}/>
-                <Route path="create-order" element={<CreateOrder />} />
-                <Route path="*" element={<Error />}/>
-            </Route>           
-            
-            {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
-            {/* <Route path="*" element={<Error />}/> */}
-            <Route path="*" element={<Error />}/>
-        </Routes>
+                    {/* <Route path="/signin" element={<Signin />} /> */}
+                    <Route path="/" element={<Signup />} />
+                    <Route path="/connect" element={<ConnectWallet />} />
+                    <Route path="userId" element={<HomepageNavbar />}>
+                        <Route path="orders" element={<OrderView/>}/>
+                        <Route path="orders/:orderId" element={<OrderDetails/>}/>
+                        <Route path="profile" element ={<Profile/>}/>
+                        <Route path="create-order" element={<CreateOrder />} />
+                        <Route path="*" element={<Error />}/>
+                    </Route>           
+                    
+                    {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
+                    {/* <Route path="*" element={<Error />}/> */}
+                    <Route path="*" element={<Error />}/>
+                </Routes>
 
-    </BrowserRouter>
-);
+            </BrowserRouter>
+        </Web3ReactProvider>
+    );
 }
 
 export default App;
