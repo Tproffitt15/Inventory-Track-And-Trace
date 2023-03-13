@@ -14,12 +14,14 @@ contract OrderNFT is ERC721 {
 
     Counters.Counter private _orderIds;
 
+    // 0: Manufacture, 1: Distributor, 2: Customer
     enum Location {
         Manufacture,
         Distributor,
         Customer
     }
 
+    // 0: Action, 1: Done
     enum Status {
         Action,
         Done
@@ -40,7 +42,7 @@ contract OrderNFT is ERC721 {
         console.log("This is Order NFT contract");
     }
 
-    function createOrder(string memory _uri, address[] memory addresses) public {
+    function createOrder(string memory  _uri, address[] memory addresses) public {
         // Consider there are only 3 parties: Manufacture, Distributor, Customer
         require(addresses.length == 3, "Number of parties must be 3");
 
