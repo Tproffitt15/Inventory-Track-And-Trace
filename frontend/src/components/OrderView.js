@@ -2,7 +2,7 @@ import "./OrderView.css"
 import OrderJSON from "../order.json";
 import React, { useState } from 'react';
 import axios from "axios";
-
+import BigNumber from 'bignumber.js';
 
 import OrderTable from "./OrderTable";
 
@@ -24,30 +24,7 @@ const OrdersView = () => {
     };
 
     const getAllNFT = async () => {
-        // const sampleData = [
-        //     {
-        //         "name": "Cardinal Health's Tylenol Order",
-        //         "description": "Mayo Clinic order 10 Tylenol from Cardinal Health",
-        //         "image": "https://m.media-amazon.com/images/I/71pibzG7xtL.jpg",
-        //         "attributes": [
-        //             {
-        //                 "trait_type": "Number of item",
-        //                 "value": "10"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         "name": "TriHealth's Blisovi Fe 24 Order",
-        //         "description": "Miami Clinic order 1 Pack Tylenol from TriHealth",
-        //         "image": "https://m.media-amazon.com/images/I/31CRTjnYkUL.jpg",
-        //         "attributes": [
-        //             {
-        //                 "trait_type": "Number of item",
-        //                 "value": "19"
-        //             }
-        //         ]
-        //     }
-        // ];
+
         const ethers = require("ethers");
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         await window.ethereum.enable();
@@ -57,33 +34,38 @@ const OrdersView = () => {
         let contract = new ethers.Contract(OrderJSON.address, OrderJSON.abi, signer)
         let transaction = await contract.getMyOrders();
 
-        // console.log(transaction);
-        // console.log()
-        // const items = await Promise.all(transaction.map(async i => {
+        const items = await Promise.all(transaction.map(async i => {
 
-        //     const tokenURI = await contract.tokenURI(i.orderId);
+            const rightId = new BigNumber(10);
+            const currId = new BigNumber(i.orderId._hex);
 
-        //     console.log(tokenURI)
+            const tokenURI = await contract.tokenURI(i.orderId);
+            if (!currId.isEqualTo(rightId)) {
+                // console.log(tokenURI);
+                const metadatJSON = {
+                }
+                return metadatJSON;
+            }
 
-        //     let meta = await axios.get(tokenURI);
 
-        //     // console.log(meta);
+            // console.log(tokenURI, i.orderId)
 
-        //     meta = meta.data;
+            let meta = await axios.get(tokenURI);
 
 
-        //     // let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
-        //     let item = {
-        //         name: meta.name,
-        //         description: meta.description,
-        //         image: meta.image
-        //     }
-        //     return item;
-        // }))
-        // let transaction = await contract.createOrder(metadatURL, addresses);
-        // await transaction.wait();
-        // alert("Successfully listed your Order NFT!");
-        // console.log(items);
+            meta = meta.data;
+            // console.log(meta);
+
+            let item = {
+                name: meta.name,
+                description: meta.description,
+                image: meta.image,
+                items: meta.items
+            }
+            return item;
+        }))
+
+        console.log(items);
         // updateFetched(true);
         // updateData(items);
     }
