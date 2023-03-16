@@ -2,6 +2,7 @@
   "name": "itt",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/userId/orders",
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.2",
     "@testing-library/jest-dom": "^5.16.5",

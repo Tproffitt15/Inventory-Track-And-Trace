@@ -1,14 +1,15 @@
-import {Link, Outlet} from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 
 const HomepageNavbar = () => {
     return (
         <div>
             <ul>
-                <li><a className="active" href="createNewOrder.html">Cardinal Health</a></li>
-                <li><Link to="orders">Orders</Link></li>
+                <li><Link to="create-order">Create Orders</Link></li>
+                {/* <li><a className="active" href="createNewOrder.html">Cardinal Health</a></li> */}
+                <li><Link to="orders">My Orders</Link></li>
                 <li><Link to="profile">Profile</Link></li>
             </ul>
-            <Outlet/>
+            <Outlet />
         </div>
     );
 };
