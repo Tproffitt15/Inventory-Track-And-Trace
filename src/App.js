@@ -11,6 +11,7 @@ import OrderView from './components/OrderView';
 import ConnectWallet from 'pages/ConnectWallet';
 // import OrderViewNavbar from 'components/OrderViewNavbar';
 import OrderDetails from 'pages/OrderDetails';
+import ShippingInfo from 'pages/ShippingInfo';
 // import ShippingInfo from 'pages/ShippingInfo';
 
 
@@ -34,6 +35,7 @@ function App() {
                     <Route path="orders/:orderId" element={<OrderDetails />} />
                     <Route path="profile" element={<Profile />} />
                     <Route path="create-order" element={<CreateOrder />} />
+                    <Route path="shippingInfo" element={<ShippingInfo />} />
                     <Route path="*" element={<Error />} />
                 </Route>
 

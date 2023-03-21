@@ -2,13 +2,13 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
-ul {
+/* ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #B21B1B;
-}
+} */
 
 li {
     float: left;
@@ -132,17 +132,32 @@ tr:hover {background-color: rgba(201, 76, 76, 0.3);}
   cursor: pointer;
 }
 
+.orderDetails {
+    display: flex;
+    flex-direction: column;
+}
+
 .orderDetailsNavbar {
     float:left;
     display: block;
     color: white;
-    text-align: center;
+    text-align: left;
     padding: 14px 16px;
     text-decoration: none;
+    
+
+    /* width: 100%; */
 }
 
 .orderDetailsNavbarOption:hover {
+    /* position: absolute;
+    bottom: 50%; */
     background-color: #111;
+}
+
+.orderDetailsContent {
+    margin-top: 20px;
+    padding: 0 50px;
 }
 
 .orderDetailsNavbarOption {

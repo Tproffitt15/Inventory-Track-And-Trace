@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom"
 
 const HomepageNavbar = () => {
     return (
-        <div>
+        <div className="navbar">
             <ul>
                 <li><Link to="create-order">Create Orders</Link></li>
                 {/* <li><a className="active" href="createNewOrder.html">Cardinal Health</a></li> */}

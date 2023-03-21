@@ -13,30 +13,34 @@ const OrderDetails = () => {
     const renderOrderDetailsTable = () => {
         switch (selectedOption) {
             case 1:
-                return <OrderDetailsTable orderId={orderId}/>;
+                return <OrderDetailsTable orderId={orderId} />;
             case 2:
-                return <ShippingInfo/>;
+                return <ShippingInfo />;
             default:
                 return null;
         }
     };
-    
+
 
     return (
         <>
             <h1> Order Details </h1>
-            <div className="orderDetailsNavbar">
-                <li onClick={() => setSelectedOption(1)} className="orderDetailsNavbarOption">General Info</li>
-                <li onClick={() => setSelectedOption(2)} className="orderDetailsNavbarOption">Shipping Info</li>
+            <div className="orderDetails">
+                <div className="orderDetailsNavbar">
+                    {/* <li onClick={() => setSelectedOption(1)} className="orderDetailsNavbarOption">General Info</li>
+                <li onClick={() => setSelectedOption(2)} className="orderDetailsNavbarOption">Shipping Info</li> */}
+                    <div onClick={() => setSelectedOption(1)} className="orderDetailsNavbarOption">
+                        General Info
+                    </div>
+                    <div onClick={() => setSelectedOption(2)} className="orderDetailsNavbarOption">
+                        Shipping Info
+                    </div>
+                </div>
+                <div className="orderDetailsContent">
+                    {renderOrderDetailsTable()}
+                </div>
             </div>
-            <div>
-                {renderOrderDetailsTable()}
-            </div>
-            {/* <Outlet/> */}
-            {/* <div>
-                <label>Media:</label>
-                <img src="tylenolNFT.png" alt="tylenolNFT" width="500" height="400"></img>
-            </div> */}
+
         </>
     );
 };

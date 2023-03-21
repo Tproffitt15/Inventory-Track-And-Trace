@@ -1,98 +1,3 @@
-body {
-    background-color: rgb(255, 255, 255);
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #B21B1B;
-}
-
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-li a:hover {
-    background-color: #111;
-}
-
-input[type=text],
-select,
-textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-}
-
-label {
-    padding: 12px 12px 12px 0;
-    display: inline-block;
-}
-
-input[type=submit] {
-    background-color: #B21B1B;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-}
-
-input[type=submit]:hover {
-    background-color: #B21B1B;
-}
-
-.container {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-}
-
-.col-25 {
-    float: left;
-    width: 25%;
-    margin-top: 6px;
-}
-
-.col-75 {
-    float: left;
-    width: 75%;
-    margin-top: 6px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-
-
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-
-    .col-25,
-    .col-75,
-    input[type=submit] {
-        width: 100%;
-        margin-top: 0;
-    }
-}
-
 #orderView {
   background-color: #808080;
   border: none;
@@ -107,7 +12,7 @@ input[type=submit]:hover {
 }
 
 #shippingInfo {
-  background-color: #B21B1B;
+  background-color: white;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -118,3 +23,69 @@ input[type=submit]:hover {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+.timeline {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .li {
+    transition: all 200ms ease-in;
+  }
+  
+  .timestamp {
+    margin-bottom: 20px;
+    padding: 0px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 100;
+  }
+  
+  .status {
+    padding: 0px 40px;
+    display: flex;
+    justify-content: center;
+    border-top: 2px solid #D6DCE0;
+    position: relative;
+    transition: all 200ms ease-in;
+  }
+  
+  .status h4 {
+    font-weight: 600;
+  }
+  
+  .status:before {
+    content: '';
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: -15px;
+    left: 42%;
+    transition: all 200ms ease-in;
+  }
+  
+  .li.complete .status:before {
+    background-color: #66DC71;
+    border: none;
+    transition: all 200ms ease-in;
+  }
+  
+  .li.complete .status h4 {
+    color: #66DC71;
+  }
+  
+  .li.complete .status {
+    border-top: 2px solid #B21B1B;
+  }
+  
+  .timeLineDiv {
+    
+    background-color: white;
+
+  }
