@@ -10,9 +10,9 @@ function OrderDetailsTable({ orderId }) {
         <table>
             <thead>
                 <tr>
-                {getHeadings().map(heading => {
-                    return <th key={heading}>{heading}</th>
-                })}
+                    {getHeadings().map(heading => {
+                        return <th key={heading}>{heading}</th>
+                    })}
                 </tr>
             </thead>
             <tbody>

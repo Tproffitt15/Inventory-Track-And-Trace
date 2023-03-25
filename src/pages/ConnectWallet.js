@@ -10,7 +10,7 @@ const ConnectWallet = () => {
 	// const [dataFetched, updateFetched] = useState(false);
 
 	const metadatJSON = {
-		name: "TriHealth's Blisovi Fe 24 Order",
+		name: "TriHealth's Blisovi Fe 25 Order",
 		description: "Miami Clinic order 1 Pack Tylenol from TriHealth",
 		image: "https://m.media-amazon.com/images/I/31CRTjnYkUL.jpg",
 		items: 19

@@ -13,14 +13,14 @@ const OrderDetails = () => {
     const renderOrderDetailsTable = () => {
         switch (selectedOption) {
             case 1:
-                return <OrderDetailsTable orderId={orderId}/>;
+                return <OrderDetailsTable orderId={orderId} />;
             case 2:
-                return <ShippingInfo/>;
+                return <ShippingInfo />;
             default:
                 return null;
         }
     };
-    
+
 
     return (
         <>
