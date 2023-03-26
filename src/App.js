@@ -13,13 +13,16 @@ import OrderView from './components/OrderView';
 import ConnectWallet from 'pages/ConnectWallet';
 import OrderDetails from 'pages/OrderDetails';
 
+//testing
+import DistIncomingOrder from 'pages/DistIncomingOrder';
+import ManIncomingOrder from 'pages/ManIncomingOrder';
+
 function App() {
     function getLibrary(provider) {
         return new Web3(provider)
     }
     return (
         <Web3ReactProvider getLibrary={getLibrary}>
-        
             <BrowserRouter>
                 <Routes>
                     {/* Route placeholder */}
@@ -33,13 +36,28 @@ function App() {
                     {/* <Route path="/signin" element={<Signin />} /> */}
                     <Route path="/" element={<Signup />} />
                     <Route path="/connect" element={<ConnectWallet />} />
-                    <Route path="userId" element={<HomepageNavbar />}>
-                        <Route path="orders" element={<OrderView/>}/>
-                        <Route path="orders/:orderId" element={<OrderDetails/>}/>
-                        <Route path="profile" element ={<Profile/>}/>
-                        <Route path="create-order" element={<CreateOrder />} />
-                        <Route path="*" element={<Error />}/>
-                    </Route>           
+                    <Route path="/manufacturer">
+                        <Route path="userId" element={<HomepageNavbar />}>
+                            <Route path="orders" element={<OrderView/>}/>
+                            <Route path="orders/:orderId" element={<OrderDetails/>}/>
+                            <Route path="profile" element ={<Profile/>}/>
+                            <Route path="create-order" element={<CreateOrder />} />
+                            <Route path="*" element={<Error />}/>
+                        </Route>
+                    </Route>
+
+                    <Route path="/distributor">
+                        <Route path="userId" element={<HomepageNavbar />}>
+                            <Route path="orders" element={<OrderView />}/>
+                            <Route path="orders/:orderId" element={<OrderDetails/>}/>
+                            <Route path="profile" element ={<Profile/>}/>
+                            <Route path="*" element={<Error />}/>
+                        </Route>
+                    </Route>
+                    
+
+                    <Route path="dist-inc-order" element={<DistIncomingOrder/>}/>
+                    <Route path="man-inc-order" element={<ManIncomingOrder/>}/>
                     
                     {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
                     {/* <Route path="*" element={<Error />}/> */}

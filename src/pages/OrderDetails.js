@@ -6,7 +6,6 @@ import { useParams } from 'react-router-dom';
 import OrderDetailsTable from "components/OrderDetailTable";
 import ShippingInfo from "./ShippingInfo";
 
-
 const OrderDetails = () => {
     const [selectedOption, setSelectedOption] = useState(1);
     const { orderId } = useParams();

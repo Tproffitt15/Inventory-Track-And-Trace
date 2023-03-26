@@ -1,9 +1,12 @@
 import orderData from "data/orders.json"
 import "./OrderTable.css"
 
-import { Link } from "react-router-dom";
+import formatPropertyName from "./Helper";
 
-function OrderTable({ filter }) {
+import { Link, withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+function OrderTable({ filter, role}) {
     const getHeadings = () => {
         return Object.keys(orderData[0]);
     }
@@ -15,24 +18,28 @@ function OrderTable({ filter }) {
             return orderData.filter(row => row.status === filter);
         }
     }
+
+    let navigate = useNavigate(); 
+    const routeChange  = (index) =>{ 
+        navigate(`${index + 1}`);
+      }
+
     return (
         <table>
             <thead>
                 <tr>
-                {getHeadings().map(heading => {
-                    return <th key={heading}>{heading}</th>
-                })}
-                    <th>Details</th>
+                    {getHeadings().map(heading => {
+                        return <th key={heading}>{formatPropertyName(heading)}</th>
+                    })}
                 </tr>
             </thead>
             <tbody>
                 {filterData(filter).map((row, index) => {
                     return (
-                        <tr key={index} >
-                            {getHeadings().map((key, index) => {
+                        <tr key={index} onClick={() => routeChange(index)}>
+                            {getHeadings().map((key) => {
                                 return <td key={row[key]}>{row[key]}</td>
                             })}
-                            <td><Link to={`${index + 1}`}>View Details</Link></td>
                         </tr>
                     );
                 })}
