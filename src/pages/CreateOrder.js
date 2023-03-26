@@ -5,7 +5,6 @@ import Select from 'react-select';
 import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
-import useUploadMetadataToIPFS from "../hooks/useUploadMetadataToIPFS"
 
 const CreateOrder = () => {
 
