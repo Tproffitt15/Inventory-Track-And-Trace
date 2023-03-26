@@ -1,91 +1,48 @@
-#orderView {
-  background-color: #808080;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+.shippingInfo {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
 }
-
-#shippingInfo {
-  background-color: white;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-.timeline {
-    list-style-type: none;
+.tracking-status {
     display: flex;
     align-items: center;
-    justify-content: center;
-  }
-  
-  .li {
-    transition: all 200ms ease-in;
-  }
-  
-  .timestamp {
     margin-bottom: 20px;
-    padding: 0px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: 100;
-  }
-  
-  .status {
-    padding: 0px 40px;
-    display: flex;
-    justify-content: center;
-    border-top: 2px solid #D6DCE0;
-    position: relative;
-    transition: all 200ms ease-in;
-  }
-  
-  .status h4 {
-    font-weight: 600;
-  }
-  
-  .status:before {
-    content: '';
-    width: 25px;
-    height: 25px;
-    background-color: white;
-    border-radius: 25px;
-    border: 1px solid #ddd;
-    position: absolute;
-    top: -15px;
-    left: 42%;
-    transition: all 200ms ease-in;
-  }
-  
-  .li.complete .status:before {
-    background-color: #66DC71;
-    border: none;
-    transition: all 200ms ease-in;
-  }
-  
-  .li.complete .status h4 {
-    color: #66DC71;
-  }
-  
-  .li.complete .status {
-    border-top: 2px solid #B21B1B;
-  }
-  
-  .timeLineDiv {
-    
-    background-color: white;
-
-  }
+}
+.status-circle {
+    height: 20px;
+    width: 20px;
+    background-color: #B21B1B;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.status-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+.status-date {
+    padding: 5px;
+    font-size: 14px;
+    color: #666;
+}
+.tracking-details {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.tracking-details th,
+.tracking-details td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+.tracking-details th {
+    background-color: #B21B1B;
+    color: #fff;
+}
+.tracking-details td:first-child {
+    font-weight: bold;
+}
