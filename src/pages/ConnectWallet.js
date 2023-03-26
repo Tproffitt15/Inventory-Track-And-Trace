@@ -1,4 +1,7 @@
 import "./ConnectWallet.css"
+
+import Injector from "components/Injector";
+import { useWeb3React } from "@web3-react/core"
 import OrderJSON from "../order.json";
 // import { useState } from "react";
 import { uploadJSONToIPFS } from "../pinata";
@@ -6,11 +9,27 @@ import { uploadJSONToIPFS } from "../pinata";
 
 const ConnectWallet = () => {
 
-	// const [data, updateData] = useState(sampleData);
-	// const [dataFetched, updateFetched] = useState(false);
+	const { active, account, library, connector, activate, deactivate } = useWeb3React()
+
+  	async function connect() {
+    	try {
+      		await activate(Injector)
+			
+		} catch (ex) {
+			console.log(ex)
+		}
+  	}
+
+	async function disconnect() {
+		try {
+			deactivate()
+		} catch (ex) {
+			console.log(ex)
+		}
+	}
 
 	const metadatJSON = {
-		name: "TriHealth's Blisovi Fe 24 Order",
+		name: "TriHealth's Blisovi Fe 25 Order",
 		description: "Miami Clinic order 1 Pack Tylenol from TriHealth",
 		image: "https://m.media-amazon.com/images/I/31CRTjnYkUL.jpg",
 		items: 19
@@ -60,6 +79,9 @@ const ConnectWallet = () => {
 		<div data-v-a11c9dcc="">
 			<button onClick={mintOrderNFT} className="enableEthereumButton">
 				Test Mint NFT
+			</button>
+			<button onClick={connect} className="enableEthereumButton">
+				Test Mint NFT react
 			</button>
 			<h2>Account: <span class="showAccount"></span></h2>
 		</div>

@@ -1,150 +1,181 @@
 import "./CreateOrder.css"
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Select from 'react-select';
+import partiesData from "data/parties.json"
+import { uploadJSONToIPFS } from "../pinata";
+import OrderJSON from "../order.json";
 
 const CreateOrder = () => {
+
+    const [drugs, setDrugs] = useState([]);
+    const [selectedDrug, setSelectedDrug] = useState("");
+    const [selectedDistributor, setSelectedDistributor] = useState("");
+    const [selectedCustomer, setSelectedCustomer] = useState("");
+    const [pinataURL, setPinataURL] = useState("");
+
+    useEffect(() => {
+        // Call the OpenFDA API to get the list of drugs
+        axios
+            .get("https://api.fda.gov/drug/label.json?count=openfda.brand_name.exact&limit=200")
+            .then((response) => {
+                const results = response.data.results.map(result => result.term);
+                // console.log(results);
+                results.sort();
+                setDrugs(results);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+
+    const handleDrugChange = (selectedDrug) => {
+        setSelectedDrug(selectedDrug);
+    };
+
+    const drugOptions = drugs.map((result) => ({
+        label: result,
+        value: result,
+    }));
+
+    const handleDistributorChange = (selectedDistributor) => {
+        setSelectedDistributor(selectedDistributor);
+    };
+
+    const handleCustomerChange = (selectedCustomer) => {
+        setSelectedCustomer(selectedCustomer);
+    };
+
+    const partiesOptions = partiesData.map((result) => ({
+        label: result.name,
+        value: result.address
+    }));
+
+
+    const uploadMetadataToIPFS = async (metadataJSON) => {
+
+        try {
+            //upload the metadata JSON to IPFS
+            const response = await uploadJSONToIPFS(metadataJSON);
+            if (response.success === true) {
+                console.log("Uploaded JSON to Pinata: ", response)
+                return response.pinataURL;
+            }
+        }
+        catch (e) {
+            console.log("error uploading JSON metadata:", e)
+        }
+    }
+
+    const mintOrderNFT = async (metadataURL, formAddresses) => {
+        try {
+            const ethers = require("ethers");
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            await window.ethereum.enable();
+            const signer = provider.getSigner();
+
+            let contract = new ethers.Contract(OrderJSON.address, OrderJSON.abi, signer)
+            const signerAddress = await signer.getAddress();
+            const addresses = [signerAddress, formAddresses[0], formAddresses[1]];
+
+            let transaction = await contract.createOrder(metadataURL, addresses);
+            await transaction.wait();
+            alert("Successfully listed your Order NFT!");
+        } catch (error) {
+            alert("Upload NFT error" + error);
+        }
+
+    }
+
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault(); // prevent the default form submission behavior
+
+        // get the form field values
+        const drug = selectedDrug;
+        const distributor = selectedDistributor;
+        const customer = selectedCustomer;
+        const deliveryDate = event.target.elements.deliveryDate.value;
+        const quantity = event.target.elements.quantity.value;
+
+        // do something with the form data, e.g. send it to the server
+
+        const order1 = { drug, distributor, customer, deliveryDate };
+        console.log(order1);
+        const order = {
+            name: `${customer.label}'s ${drug.label} Order`,
+            description: `${customer.label} order ${quantity} of ${drug.label} from ${distributor.label}`,
+            estimatedDate: deliveryDate,
+            quantity: quantity
+        };
+        // const addresses = [walletAddress1, walletAddress2, walletAddress3];
+        const metadataURL = await uploadMetadataToIPFS(order);
+
+        // console.log(metadataURL);
+        mintOrderNFT(metadataURL, [distributor.value, customer.value]);
+        setPinataURL(metadataURL);
+    };
+
+
     return (
-        <section>
+        <section class="container">
             <h2>Create New Order</h2>
+            <form onSubmit={handleFormSubmit}>
+                <div class="form-group">
+                    <label for="drugSelect">Search for a drug</label>
+                    <Select
+                        id="drugSelect"
+                        class="form-control"
+                        options={drugOptions}
+                        value={selectedDrug}
+                        onChange={handleDrugChange}
+                        isSearchable={true}
+                    />
+                </div>
 
-            <div className="container">
-                <form className="htmlForm" action="action_page.php" method="post">
-                    <div className="row">
-                        <label htmlFor="orderDetails" className="htmlForm-label">Choose Drug</label>
-                        <select name="drugs" id="drugs">
-                            <option value="">ibuprofen</option>
-                            <option value="">tylenol</option>
-                        </select>
-                        <label htmlFor="quantity">Quantity (between 1 and 5):</label>
-                        <input type="number" id="quantity" name="quantity" min="1" max="5"></input>
-                    </div>
+                <div class="form-group">
+                    <label for="distributorSelect">Choose distributor</label>
+                    <Select
+                        id="distributorSelect"
+                        class="form-control"
+                        options={partiesOptions}
+                        value={selectedDistributor}
+                        onChange={handleDistributorChange}
+                        isSearchable={true}
+                    />
+                </div>
 
-                    <h4>From Delivery Address</h4>
+                <div class="form-group">
+                    <label for="customerSelect">Choose customer</label>
+                    <Select
+                        id="customerSelect"
+                        class="form-control"
+                        options={partiesOptions}
+                        value={selectedCustomer}
+                        onChange={handleCustomerChange}
+                        isSearchable={true}
+                    />
+                </div>
+                <div>
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="deliveryDate">Deliver By</label>
+                    <input type="date" id="deliveryDate" name="deliveryDate" class="form-control" />
+                </div>
 
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="dAddress">Address Line 1</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="dAddress" name="dAddress1" placeholder="From Address.."></input>
-                        </div>
-                    </div>
+                <button type="submit" id="submitButton" class="btn btn-primary float-left create">Create Order</button>
+            </form>
 
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="dAddress2">Address Line 2 (optional)</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="dAddress2" name="dAddress2" placeholder="From Address.."></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="city">City</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="city" name="city"></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="state">State</label>
-                        </div>
-                        <div className="col-75">
-                            <select id="state" name="state">
-                                <option value="indiana">Indiana</option>
-                                <option value="ohio">Ohio</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="city">Zip Code</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="zip" name="zipCode"></input>
-                        </div>
-                    </div>
-
-                    <h4>To Delivery Address</h4>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="taddress">Address Line 1</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="tAddress" name="tAddress1" placeholder="To Address.."></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="taddress2">Address Line 2 (optional)</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="tAddress2" name="tAddress2"></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="city">City</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="tcity" name="tCity"></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="state">State</label>
-                        </div>
-                        <div className="col-75">
-                            <select id="tstate" name="tState">
-                                <option value="indiana">Indiana</option>
-                                <option value="ohio">Ohio</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="city">Zip Code</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="tzip" name="tZipCode"></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="deliveryDate">Deliver By</label>
-                            <input type="date" id="deliveryDate" name="deliveryDate"></input>
-                        </div>
-                    </div>
-                    
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="trackingNum">Tracking #</label>
-                            <input type="number" id="trackingNum" name="trackingNumber" placeholder="9400 1000 0000 0000 00"></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="uploadFile">Upload File</label>
-                            <input type="file" id="uploadFile" name="uploadFile"></input>
-                        </div>
-                    </div>
-
-                    <br></br>
-                    <div className="row">
-                        <input type="submit" id="submitButton" value="Create Order"></input>
-                    </div>
-                </form>
-            </div>
+            {/* {pinataURL && (
+                <div id="upload-success">
+                    Order metadata uploaded to IPFS: <a href={pinataURL}>{pinataURL}</a>
+                </div>
+            )} */}
         </section>
+
     );
 };
 
