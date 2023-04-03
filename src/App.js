@@ -31,37 +31,37 @@ function App() {
                                 distributor/:id/all-orders
                                 etc.
                     */}
-                    
+
 
                     {/* <Route path="/signin" element={<Signin />} /> */}
                     <Route path="/" element={<Signup />} />
                     <Route path="/connect" element={<ConnectWallet />} />
                     <Route path="/manufacturer">
                         <Route path="userId" element={<HomepageNavbar />}>
-                            <Route path="orders" element={<OrderView/>}/>
-                            <Route path="orders/:orderId" element={<OrderDetails/>}/>
-                            <Route path="profile" element ={<Profile/>}/>
+                            <Route path="orders" element={<OrderView />} />
+                            <Route path="orders/:orderId" element={<OrderDetails />} />
+                            <Route path="profile" element={<Profile />} />
                             <Route path="create-order" element={<CreateOrder />} />
-                            <Route path="*" element={<Error />}/>
+                            <Route path="*" element={<Error />} />
                         </Route>
                     </Route>
 
                     <Route path="/distributor">
                         <Route path="userId" element={<HomepageNavbar />}>
-                            <Route path="orders" element={<OrderView />}/>
-                            <Route path="orders/:orderId" element={<OrderDetails/>}/>
-                            <Route path="profile" element ={<Profile/>}/>
-                            <Route path="*" element={<Error />}/>
+                            <Route path="orders" element={<OrderView />} />
+                            <Route path="orders/:orderId" element={<OrderDetails />} />
+                            <Route path="profile" element={<Profile />} />
+                            <Route path="*" element={<Error />} />
                         </Route>
                     </Route>
-                    
 
-                    <Route path="dist-inc-order" element={<DistIncomingOrder/>}/>
-                    <Route path="man-inc-order" element={<ManIncomingOrder/>}/>
-                    
+
+                    <Route path="dist-inc-order" element={<DistIncomingOrder />} />
+                    <Route path="man-inc-order" element={<ManIncomingOrder />} />
+
                     {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
                     {/* <Route path="*" element={<Error />}/> */}
-                    <Route path="*" element={<Error />}/>
+                    <Route path="*" element={<Error />} />
                 </Routes>
 
             </BrowserRouter>

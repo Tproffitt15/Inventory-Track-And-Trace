@@ -1,6 +1,6 @@
 import "./OrderView.css"
 import OrderJSON from "../order.json";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import BigNumber from 'bignumber.js';
 
@@ -24,6 +24,7 @@ const OrdersView = () => {
     };
 
     const getAllNFT = async () => {
+        console.log('getAllNFT called');
 
         const ethers = require("ethers");
         const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -34,44 +35,48 @@ const OrdersView = () => {
         let contract = new ethers.Contract(OrderJSON.address, OrderJSON.abi, signer)
         let transaction = await contract.getMyOrders();
 
-        const items = await Promise.all(transaction.map(async i => {
+        // console.log(transaction);
+        const items = await Promise.all(
+            transaction
+                // Test code, remove in production
+                .filter(i => {
+                    const currId = new BigNumber(i.orderId._hex);
+                    return currId.isGreaterThanOrEqualTo(12) && currId.isLessThanOrEqualTo(15);
+                })
+                .map(async i => {
+                    const tokenURI = await contract.tokenURI(i.orderId);
+                    // Process tokenURI here
+                    // console.log(tokenURI, i.orderId)
 
-            const rightId = new BigNumber(10);
-            const currId = new BigNumber(i.orderId._hex);
+                    const response = await (await fetch(tokenURI)).json()
+                    // console.log(response);
+                    let item = {
+                        orderId: parseInt(i.orderId.toString(), 10),
+                        issueDate: response.issueDate,
+                        expectedDate: response.expectedDate,
+                        distributor: response.distributor,
+                        customer: response.customer
+                    }
 
-            const tokenURI = await contract.tokenURI(i.orderId);
-            if (!currId.isEqualTo(rightId)) {
-                // console.log(tokenURI);
-                const metadatJSON = {
-                }
-                return metadatJSON;
-            }
+                    // console.log(item);
+                    return item
+                    // let meta = await axios
+                    //     .get(tokenURI);
+                    // console.log(tokenURI, i.orderId, meta)
+                })
+        );
 
-
-            // console.log(tokenURI, i.orderId)
-
-            let meta = await axios.get(tokenURI);
-
-
-            meta = meta.data;
-            // console.log(meta);
-
-            let item = {
-                name: meta.name,
-                description: meta.description,
-                image: meta.image,
-                items: meta.items
-            }
-            return item;
-        }))
 
         console.log(items);
-        // updateFetched(true);
-        // updateData(items);
+        updateFetched(true);
+        updateData(items);
     }
 
-    // if (!dataFetched)
-    getAllNFT();
+    useEffect(() => {
+        console.log('useEffect called');
+        getAllNFT();
+    }, []);
+
 
     return (
         <>

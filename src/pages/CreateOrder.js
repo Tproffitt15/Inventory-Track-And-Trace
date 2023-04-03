@@ -5,6 +5,7 @@ import Select from 'react-select';
 import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
+import { Modal, Spinner } from 'react-bootstrap';
 
 const CreateOrder = () => {
 
@@ -12,7 +13,9 @@ const CreateOrder = () => {
     const [selectedDrug, setSelectedDrug] = useState("");
     const [selectedDistributor, setSelectedDistributor] = useState("");
     const [selectedCustomer, setSelectedCustomer] = useState("");
-    const [pinataURL, setPinataURL] = useState("");
+    const [showModal, setShowModal] = useState(false);
+
+    // const [pinataURL, setPinataURL] = useState("");
 
     useEffect(() => {
         // Call the OpenFDA API to get the list of drugs
@@ -98,23 +101,26 @@ const CreateOrder = () => {
         const customer = selectedCustomer;
         const deliveryDate = event.target.elements.deliveryDate.value;
         const quantity = event.target.elements.quantity.value;
-
+        const currentDate = new Date().toLocaleDateString();
+        // console.log(currentDate);
         // do something with the form data, e.g. send it to the server
 
         const order1 = { drug, distributor, customer, deliveryDate };
-        console.log(order1);
+        console.log("Debug ", order1);
         const order = {
-            name: `${customer.label}'s ${drug.label} Order`,
-            description: `${customer.label} order ${quantity} of ${drug.label} from ${distributor.label}`,
-            estimatedDate: deliveryDate,
-            quantity: quantity
+            issueDate: currentDate,
+            expectedDate: deliveryDate,
+            distributor: distributor.label,
+            customer: customer.label
         };
-        // const addresses = [walletAddress1, walletAddress2, walletAddress3];
         const metadataURL = await uploadMetadataToIPFS(order);
 
         // console.log(metadataURL);
-        mintOrderNFT(metadataURL, [distributor.value, customer.value]);
-        setPinataURL(metadataURL);
+        setShowModal(true);
+        await mintOrderNFT(metadataURL, [distributor.value, customer.value]);
+        setShowModal(false);
+
+        // setPinataURL(metadataURL);
     };
 
 
@@ -174,6 +180,15 @@ const CreateOrder = () => {
                     Order metadata uploaded to IPFS: <a href={pinataURL}>{pinataURL}</a>
                 </div>
             )} */}
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <div className="spinner"></div>
+                        <p className="loading-text">Please do not close or refresh the tab while your NFT is being minted...</p>
+                    </div>
+                </div>
+            )}
+
         </section>
 
     );
