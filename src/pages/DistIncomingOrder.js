@@ -16,6 +16,10 @@ const DistIncomingOrder = () => {
         "status": "completed"
     };
 
+    function receiveOrder () {
+        console.log("distributor received order, redirect to forward order");
+    }
+
     return (
         <>
             <h1> Incoming Order From [Distributor]</h1>
@@ -23,7 +27,7 @@ const DistIncomingOrder = () => {
                 <IncomingOrderTable orderData={orderData}/>
             </div>
             <button id="rejectButton">Reject</button>
-            <button id="completeButton">Complete</button>
+            <button id="completeButton" onClick={receiveOrder()}>Receive</button>
         </>
     );
 }
