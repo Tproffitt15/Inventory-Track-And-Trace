@@ -120,7 +120,7 @@ const CreateOrder = () => {
 
     return (
         <section class="container">
-            <h2>Create New Order</h2>
+            <h1>Create New Order</h1>
             <form onSubmit={handleFormSubmit}>
                 <div class="form-group">
                     <label for="drugSelect">Search for a drug</label>
