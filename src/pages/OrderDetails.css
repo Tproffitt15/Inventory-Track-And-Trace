@@ -133,11 +133,10 @@ tr:hover {background-color: rgba(201, 76, 76, 0.3);}
 }
 
 .orderDetailsNavbar {
-    float:left;
+    align-self: center;
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 

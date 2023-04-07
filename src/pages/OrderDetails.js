@@ -25,8 +25,8 @@ const OrderDetails = () => {
         <div className="container">
             <h1> Order Details </h1>
             <div className="orderDetailsNavbar">
-                <li onClick={() => setSelectedOption(1)} className="orderDetailsNavbarOption">General Info</li>
-                <li onClick={() => setSelectedOption(2)} className="orderDetailsNavbarOption">Shipping Info</li>
+                <btn onClick={() => setSelectedOption(1)} className="orderDetailsNavbarOption">General Info</btn>
+                <btn onClick={() => setSelectedOption(2)} className="orderDetailsNavbarOption">Shipping Info</btn>
             </div>
             <div>
                 {renderOrderDetailsTable()}

@@ -2,17 +2,19 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
-orderTable {
-
-    
-}
-
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #B21B1B;
+}
+
+.orderTable {
+
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 li {
