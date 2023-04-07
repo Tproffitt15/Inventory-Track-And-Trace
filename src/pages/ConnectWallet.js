@@ -76,7 +76,7 @@ const ConnectWallet = () => {
 	}
 
 	return (
-		<div data-v-a11c9dcc="">
+		<div className="container">
 			<button onClick={mintOrderNFT} className="enableEthereumButton">
 				Test Mint NFT
 			</button>

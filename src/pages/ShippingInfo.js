@@ -2,7 +2,7 @@ import "./ShippingInfo.css"
 
 const ShippingInfo = () => {
     return (
-        <div class="shippingInfo">
+        <div class="container">
 		<div class="tracking-status">
 			<div class="status-circle"></div>
 			<div class="status-label">Shipping Info</div>

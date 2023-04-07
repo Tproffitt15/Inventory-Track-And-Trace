@@ -17,14 +17,14 @@ const ManIncomingOrder = () => {
         };
 
     return (
-        <>
+        <div className="container">
             <h1> Incoming Order From [Manufacturer]</h1>
             <div className="content">
                 <IncomingOrderTable orderData={orderData}/>
             </div>
             <button id="declineButton">Decline</button>
             <button id="recieveButton">Receive</button>
-        </>
+        </div>
     );
 }
 

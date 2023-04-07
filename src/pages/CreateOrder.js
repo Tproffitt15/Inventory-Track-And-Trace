@@ -119,7 +119,7 @@ const CreateOrder = () => {
 
 
     return (
-        <section class="container">
+        <div class="container">
             <h1>Create New Order</h1>
             <form onSubmit={handleFormSubmit}>
                 <div class="form-group">
@@ -174,7 +174,7 @@ const CreateOrder = () => {
                     Order metadata uploaded to IPFS: <a href={pinataURL}>{pinataURL}</a>
                 </div>
             )} */}
-        </section>
+        </div>
 
     );
 };
