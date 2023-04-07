@@ -1,0 +1,83 @@
+* {
+    box-sizing: border-box;
+  }
+/*   
+  body {
+    display: flex;
+    justify-content: center;
+
+
+
+  } */
+  
+  .signup {
+    
+
+  }
+
+  .form-group {
+
+    
+  }
+
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+    font-weight: 700;
+    color: #B21B1B;
+  }
+  
+  p {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #555;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #555;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus,
+  select:focus {
+    outline: none;
+    border-color: #B21B1B;
+  }
+  
