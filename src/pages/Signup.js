@@ -46,7 +46,7 @@ const Signup = () => {
                     <input type="radio" id="manufacturer" name="manufacturer" value="Manufacturer"></input>
                     <label htmlFor="manufacturer">Manufacturer</label>
                         <br></br>
-                    <input type="radio" id="distributer" name="distributer" value="Distributer"></input>
+                        <input type="radio" id="distributor" name="distributor" value="Distributor"></input>
                     <label htmlFor="distributer">Distributer</label>
                         <br></br>
                     <input type="radio" id="customer" name="customer" value="Customer"></input>

@@ -28,27 +28,29 @@ function OrderTable({ filter, role}) {
     }
 
     return (
-        <table>
-            <thead>
-                <tr>
-                    {getHeadings().map(heading => {
-                        return <th key={heading}>{formatPropertyName(heading)}</th>
+        <div className="orderTable">
+            <table>
+                <thead>
+                    <tr>
+                        {getHeadings().map(heading => {
+                            return <th key={heading}>{formatPropertyName(heading)}</th>
+                        })}
+                    </tr>
+                </thead>
+                <tbody>
+                    {filterData(filter).map((row, index) => {
+                        return (
+                            <tr key={index} onClick={() => routeChange(index, row.status)}>
+                                {getHeadings().map((key) => {
+                                    return <td key={row[key]}>{row[key]}</td>
+                                })}
+                            </tr>
+                        );
                     })}
-                </tr>
-            </thead>
-            <tbody>
-                {filterData(filter).map((row, index) => {
-                    return (
-                        <tr key={index} onClick={() => routeChange(index, row.status)}>
-                            {getHeadings().map((key) => {
-                                return <td key={row[key]}>{row[key]}</td>
-                            })}
-                        </tr>
-                    );
-                })}
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     );
 }
 

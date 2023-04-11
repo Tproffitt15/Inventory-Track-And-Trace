@@ -20,13 +20,17 @@ const DistIncomingOrder = () => {
         console.log("distributor received order, redirect to forward order");
     }
 
+    function rejectOrder () {
+        console.log("distributor reject order, redirect to all orders");
+    }
+
     return (
         <>
             <h1> Incoming Order From [Distributor]</h1>
             <div className="content">
                 <IncomingOrderTable orderData={orderData}/>
             </div>
-            <button id="rejectButton">Reject</button>
+            <button id="rejectButton" onClick={rejectOrder()}>Reject</button>
             <button id="completeButton" onClick={receiveOrder()}>Receive</button>
         </>
     );
