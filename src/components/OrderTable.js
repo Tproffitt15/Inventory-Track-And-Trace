@@ -6,7 +6,7 @@ import formatPropertyName from "./Helper";
 import { Link, withRouter } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
-function OrderTable({ filter, role}) {
+function OrderTable({ filter, role }) {
     const getHeadings = () => {
         return Object.keys(orderData[0]);
     }
@@ -19,10 +19,10 @@ function OrderTable({ filter, role}) {
         }
     }
 
-    let navigate = useNavigate(); 
-    const routeChange  = (index) =>{ 
+    let navigate = useNavigate();
+    const routeChange = (index) => {
         navigate(`${index + 1}`);
-      }
+    }
 
     return (
         <table>

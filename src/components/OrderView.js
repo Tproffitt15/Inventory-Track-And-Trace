@@ -46,7 +46,8 @@ const OrdersView = () => {
                 .map(async i => {
                     const tokenURI = await contract.tokenURI(i.orderId);
                     // Process tokenURI here
-                    // console.log(tokenURI, i.orderId)
+
+                    // console.log(i);
 
                     const response = await (await fetch(tokenURI)).json()
                     // console.log(response);
@@ -55,7 +56,9 @@ const OrdersView = () => {
                         issueDate: response.issueDate,
                         expectedDate: response.expectedDate,
                         distributor: response.distributor,
-                        customer: response.customer
+                        customer: response.customer,
+                        status: i.status,
+                        location: i.location
                     }
 
                     // console.log(item);
@@ -66,17 +69,15 @@ const OrdersView = () => {
                 })
         );
 
-
         console.log(items);
         updateFetched(true);
         updateData(items);
     }
 
+    // getAllNFT();
     useEffect(() => {
-        console.log('useEffect called');
         getAllNFT();
-    }, []);
-
+    }, [])
 
     return (
         <>

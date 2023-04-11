@@ -3,8 +3,6 @@
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 
@@ -14,22 +12,18 @@ contract OrderNFT is ERC721 {
 
     Counters.Counter private _orderIds;
 
-    // 0: Manufacture, 1: Distributor, 2: Customer
-    enum Location {
-        Manufacture,
-        Distributor,
-        Customer
-    }
-
-    // 0: Action, 1: Done
     enum Status {
-        Action,
-        Done
+        ManufacturerShipped,
+        DistributorReceived,
+        DistributorForwarded,
+        DistributorDecline,
+        CustomerReject,
+        CustomerComplete,
+        CustomerReturn
     }
 
     struct Order {
         uint256 orderId;
-        Location location;
         Status status;
         address currentOwner;
     }
@@ -50,7 +44,7 @@ contract OrderNFT is ERC721 {
         uint256 newOrderId = _orderIds.current();
 
         // Create new order struct
-        Order memory newOrder = Order(newOrderId, Location.Manufacture, Status.Done ,msg.sender);
+        Order memory newOrder = Order(newOrderId, Status.ManufacturerShipped, msg.sender);
 
         // Save parties that involves in the transaction
         for (uint256 i = 0; i < addresses.length; i++) {
@@ -96,9 +90,8 @@ contract OrderNFT is ERC721 {
         return orders;
     }
 
-    function transferOwner(uint256 orderId, address to, Status _status, Location _location) public {
+    function transferOwner(uint256 orderId, address to, Status _status) public {
         _orders[orderId].status = _status;
-        _orders[orderId].location = _location;
         _transfer(_orders[orderId].currentOwner, to, orderId);
     }
 
