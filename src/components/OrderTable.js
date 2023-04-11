@@ -3,7 +3,6 @@ import "./OrderTable.css"
 
 import formatPropertyName from "./Helper";
 
-import { Link, withRouter } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function OrderTable({ filter, role}) {
@@ -20,8 +19,12 @@ function OrderTable({ filter, role}) {
     }
 
     let navigate = useNavigate(); 
-    const routeChange  = (index) =>{ 
-        navigate(`${index + 1}`);
+    const routeChange  = (index, orderStatus) => { 
+        if (role === "manufacturer") {
+            navigate(`${index + 1}`);
+        }
+        else 
+            navigate(`${orderStatus}/${index + 1}`);
     }
 
     return (
@@ -37,7 +40,7 @@ function OrderTable({ filter, role}) {
                 <tbody>
                     {filterData(filter).map((row, index) => {
                         return (
-                            <tr key={index} onClick={() => routeChange(index)}>
+                            <tr key={index} onClick={() => routeChange(index, row.status)}>
                                 {getHeadings().map((key) => {
                                     return <td key={row[key]}>{row[key]}</td>
                                 })}

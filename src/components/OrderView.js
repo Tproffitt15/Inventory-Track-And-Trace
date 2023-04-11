@@ -9,21 +9,50 @@ import BigNumber from 'bignumber.js';
 import { Link, useNavigate } from "react-router-dom";
 
 
-const OrdersView = () => {
+const OrdersView = ( {role} ) => {
     const [data, updateData] = useState({});
     const [dataFetched, updateFetched] = useState(false);
     const [selectedOption, setSelectedOption] = useState(1);
     const renderOrderTable = () => {
-        switch (selectedOption) {
-            case 1:
-                return <OrderTable filter="all" />;
-            case 2:
-                return <OrderTable filter="incoming" />;
-            case 3:
-                return <OrderTable filter="forwarded" />;
-            default:
-                return null;
+        if (role === "manufacturer") {
+            switch (selectedOption) {
+                case 1:
+                    return <OrderTable filter="all" role="manufacturer" />;
+                case 2:
+                    return <OrderTable filter="incoming" role="manufacturer" />;
+                case 3:
+                    return <OrderTable filter="forwarded" role="manufacturer" />;
+                default:
+                    return null;
+            }
         }
+
+        else if (role === "distributor") {
+            switch (selectedOption) {
+                case 1:
+                    return <OrderTable filter="all" role="distributor" />;
+                case 2:
+                    return <OrderTable filter="incoming" role="distributor" />;
+                case 3:
+                    return <OrderTable filter="forwarded" role="distributor" />;
+                default:
+                    return null;
+            }
+        }
+        // for customer
+        // else {
+        //     switch (selectedOption) {
+        //         case 1:
+        //             return <OrderTable filter="all" role="distributor" />;
+        //         case 2:
+        //             return <OrderTable filter="incoming" role="distributor" />;
+        //         case 3:
+        //             return <OrderTable filter="forwarded" role="distributor" />;
+        //         default:
+        //             return null;
+        //     }
+        // }
+        
     };
 
     const getAllNFT = async () => {
