@@ -1,66 +1,39 @@
-import "./Signup.css"
-
-import {Link, Outlet} from "react-router-dom"
+import styles from "./Signup.module.css"
+import { Link } from "react-router-dom";
 
 const Signup = () => {
-    return (
-        <section className="signup">
-            <h1>Welcome to Cardinal Health's Inventory Track and Trace</h1>
-
-            <h4>Let's get you set up.</h4>
-
-            <div className="container">
-                <form className="form" action="action_page.php" method="post">
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="compName">Company Name</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="compName" name="compName" placeholder="Company Name"></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="compName">Email Address</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="text" id="email" name="email" placeholder="example@pmail.com"></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="compName">Password</label>
-                        </div>
-                        <div className="col-75">
-                            <input type="password" id="pw" name="pw" placeholder="password..."></input>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="compName">Choose your company's role</label>
-                        </div>
-                <div className="col-75">
-                    <input type="radio" id="manufacturer" name="manufacturer" value="Manufacturer"></input>
-                    <label htmlFor="manufacturer">Manufacturer</label>
-                        <br></br>
-                        <input type="radio" id="distributor" name="distributor" value="Distributor"></input>
-                    <label htmlFor="distributer">Distributer</label>
-                        <br></br>
-                    <input type="radio" id="customer" name="customer" value="Customer"></input>
-            	    <label htmlFor="customer">Customer</label>
-                </div>
-                    </div>
-                    <br></br>
-                    <div className="row">
-                        <button><Link to="connect" id="submitButton">Next Step</Link></button>
-                    </div>
-                </form>
-            </div>
-        </section>
-    );
+  return (
+    <div className="container">
+      <h1>Welcome to Cardinal Health's Inventory Track and Trace.</h1>
+      <p>Let's get you set up.</p>
+      <form>
+        <div className={styles.group}>
+          <label htmlFor="company-name">Company Name:</label>
+          <input type="text" id="company-name" name="company-name" required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Create Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="company-role">Choose Company Role:</label>
+          <select id="company-role" name="company-role" required>
+            <option value="" disabled selected>
+              Select role
+            </option>
+            <option value="manufacturer">I'm a Manufacturer</option>
+            <option value="distributor">I'm a Distributor</option>
+            <option value="customer">I'm a Customer</option>
+          </select>
+        </div>
+        <button type="submit" className="next">Next Step</button>
+      </form>
+    </div>
+  );
 };
 
 export default Signup;

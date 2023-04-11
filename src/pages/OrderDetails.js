@@ -12,17 +12,17 @@ const OrderDetails = () => {
     const renderOrderDetailsTable = () => {
         switch (selectedOption) {
             case 1:
-                return <OrderDetailsTable orderId={orderId}/>;
+                return <OrderDetailsTable orderId={orderId} />;
             case 2:
-                return <ShippingInfo/>;
+                return <ShippingInfo />;
             default:
                 return null;
         }
     };
-    
+
 
     return (
-        <>
+        <div className="container">
             <h1> Order Details </h1>
             <div className="orderDetailsNavbar">
                 <li onClick={() => setSelectedOption(1)} className="orderDetailsNavbarOption">General Info</li>
@@ -36,7 +36,7 @@ const OrderDetails = () => {
                 <label>Media:</label>
                 <img src="tylenolNFT.png" alt="tylenolNFT" width="500" height="400"></img>
             </div> */}
-        </>
+        </div>
     );
 };
 

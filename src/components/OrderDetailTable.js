@@ -11,16 +11,16 @@ function OrderDetailsTable({ orderId }) {
     console.log(order);
     return (
         <table>
-        <tbody>
-            {keys.map((key) => {
-                return (
-                    <tr key={key}>
-                        <td>{formatPropertyName(key)}</td>
-                        <td>{order[key]}</td>
-                    </tr>
-                )
-            })}
-        </tbody>
+            <tbody>
+                {keys.map((key) => {
+                    return (
+                        <tr key={key}>
+                            <td>{formatPropertyName(key)}</td>
+                            <td>{order[key]}</td>
+                        </tr>
+                    )
+                })}
+            </tbody>
         </table>
     );
 }

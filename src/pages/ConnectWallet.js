@@ -29,7 +29,7 @@ const ConnectWallet = () => {
 	}
 
 	const metadatJSON = {
-		name: "TriHealth's Blisovi Fe 24 Order",
+		name: "TriHealth's Blisovi Fe 25 Order",
 		description: "Miami Clinic order 1 Pack Tylenol from TriHealth",
 		image: "https://m.media-amazon.com/images/I/31CRTjnYkUL.jpg",
 		items: 19
@@ -76,7 +76,7 @@ const ConnectWallet = () => {
 	}
 
 	return (
-		<div data-v-a11c9dcc="">
+		<div className="container">
 			<button onClick={mintOrderNFT} className="enableEthereumButton">
 				Test Mint NFT
 			</button>
