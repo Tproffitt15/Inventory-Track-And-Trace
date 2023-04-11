@@ -23,7 +23,7 @@ const ManIncomingOrder = () => {
                 <IncomingOrderTable orderData={orderData}/>
             </div>
             <button id="declineButton">Decline</button>
-            <button id="recieveButton">Receive</button>
+            <button id="receiveButton">Receive</button>
         </div>
     );
 }

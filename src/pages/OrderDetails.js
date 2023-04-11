@@ -1,4 +1,4 @@
-import "./OrderDetails.css"
+import styles from "./OrderDetails.module.css"
 
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -24,9 +24,9 @@ const OrderDetails = () => {
     return (
         <div className="container">
             <h1> Order Details </h1>
-            <div className="orderDetailsNavbar">
-                <btn onClick={() => setSelectedOption(1)} className="orderDetailsNavbarOption">General Info</btn>
-                <btn onClick={() => setSelectedOption(2)} className="orderDetailsNavbarOption">Shipping Info</btn>
+            <div className={styles.orderDetailsNavbar}>
+                <button onClick={() => setSelectedOption(1)} className={`${styles.orderDetailNavbarOption} ${selectedOption === 1 ? styles.active : ''}`}>General Info</button>
+                <button onClick={() => setSelectedOption(2)} className={`${styles.orderDetailNavbarOption} ${selectedOption === 2 ? styles.active : ''}`}>Shipping Info</button>
             </div>
             <div>
                 {renderOrderDetailsTable()}

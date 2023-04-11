@@ -22,7 +22,7 @@ function OrderTable({ filter, role}) {
     let navigate = useNavigate(); 
     const routeChange  = (index) =>{ 
         navigate(`${index + 1}`);
-      }
+    }
 
     return (
         <div className="orderTable">

@@ -11,20 +11,20 @@ function OrderDetailsTable({ orderId }) {
     console.log(order);
     return (
         <div className="container">
-        <div className="tracking-details">
-            <table>
-                <tbody>
-                    {keys.map((key) => {
-                        return (
-                            <tr key={key}>
-                                <td>{formatPropertyName(key)}</td>
-                                <td>{order[key]}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
-        </div>
+            <div className="tracking-details">
+                <table>
+                    <tbody>
+                        {keys.map((key) => {
+                            return (
+                                <tr key={key}>
+                                    <td>{formatPropertyName(key)}</td>
+                                    <td>{order[key]}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

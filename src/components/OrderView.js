@@ -1,11 +1,12 @@
-import "./OrderView.css"
+import styles from "./OrderView.module.css"
+import createOrderIcon from "../assets/create-order-icon.png"
 import OrderJSON from "../order.json";
 import OrderTable from "./OrderTable";
 
 import React, { useState } from 'react';
 import axios from "axios";
 import BigNumber from 'bignumber.js';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const OrdersView = () => {
@@ -75,13 +76,28 @@ const OrdersView = () => {
     // if (!dataFetched)
     getAllNFT();
 
+    let navigate = useNavigate(); 
+    const routeChange = () => { 
+        navigate("../create-order");
+    }
+
     return (
         <>
-            <div className="orderNavbar">
-                <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
-                <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
-                <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Forwarded Orders</li>
-                <li><Link to="create-order">Should not press this</Link></li>
+            <div className={styles.orderNavbar}>
+                <div className={styles.orderNavbarOptions}>
+                    <button onClick={() => setSelectedOption(1)} className={`${styles.orderNavbarOption} ${selectedOption === 1 ? styles.active : ''}`}>All Orders</button>
+                    <button onClick={() => setSelectedOption(2)} className={`${styles.orderNavbarOption} ${selectedOption === 2 ? styles.active : ''}`}>Incoming Orders</button>
+                    <button onClick={() => setSelectedOption(3)} className={`${styles.orderNavbarOption} ${selectedOption === 3 ? styles.active : ''}`}>Forwarded Orders</button>
+                </div>
+                <div >
+                    <button className={styles.createOrder} onClick={() => routeChange()}>
+                        <img src={createOrderIcon} className={styles.createOrderIcon}></img>
+                        <div>
+                            <h3>Create New Order</h3>
+                            <h4>This will mint the NFT for you</h4>
+                        </div>                       
+                    </button>
+                </div>
             </div>
             <div>
                 {renderOrderTable()}
