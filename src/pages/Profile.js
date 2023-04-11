@@ -1,42 +1,26 @@
-import "./Profile.css"
+import React from "react";
+import "./Profile.css";
 
 const Profile = () => {
     return (
-        <div>
-            <div className="container rounded bg-white mt-5 mb-5">
-                <div className="row">
-                    <div className="col-md-5 border-right">
-                        <div className="p-3 py-5">
-                            <div className="d-flex justify-content-between align-items-center mb-3">
-                                <h1 className="text-right">Profile Details</h1>
-                            </div>
-                            <div className="row mt-2">
-                                <div className="col-25">
-                                    <label className="labels">Company Name</label>
-                                    <input type="text" className="form-control" placeholder="name" defaultValue=""></input>
-                                </div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-md-12">
-                                    <label className="labels">Email Address</label>
-                                    <input type="text" className="form-control" placeholder="enter email address" defaultValue=""></input>
-                                </div>
-                            </div>
-                            <div className="row mt-3">
-                                <div className="col-md-6">
-                                    <label className="labels">Wallet Address</label>
-                                    <input type="text" className="form-control" placeholder="wallet address" defaultValue=""></input>
-                                </div>
-                                <div className="mt-5 text-center">
-                                    <button className="btn btn-primary profile-button" type="button">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div className="container">
+            <h1>Profile</h1>
+            <form>
+                <div className="form-group">
+                    <label htmlFor="company-name">Company Name:</label>
+                    <input type="text" id="company-name" name="company-name" value="Cardinal Health" required />
                 </div>
-            </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email:</label>
+                    <input type="email" id="email" name="email" value="info@cardinalhealth.com" required />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="wallet-address">Wallet Address:</label>
+                    <input type="text" id="wallet-address" name="wallet-address" value="0x5B38Da6a701c568545dCfcB03FcB875f56beddC4" required />
+                </div>
+                <button type="submit" className="save">Save Changes</button>
+            </form>
         </div>
-
     );
 };
 
