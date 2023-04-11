@@ -1,10 +1,12 @@
 import "./OrderView.css"
 import OrderJSON from "../order.json";
+import OrderTable from "./OrderTable";
+
 import React, { useState } from 'react';
 import axios from "axios";
 import BigNumber from 'bignumber.js';
+import { Link } from "react-router-dom";
 
-import OrderTable from "./OrderTable";
 
 const OrdersView = () => {
     const [data, updateData] = useState({});
@@ -75,11 +77,11 @@ const OrdersView = () => {
 
     return (
         <>
-            <h1> Order View </h1>
             <div className="orderNavbar">
                 <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
                 <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
                 <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Forwarded Orders</li>
+                <li><Link to="create-order">Should not press this</Link></li>
             </div>
             <div>
                 {renderOrderTable()}
