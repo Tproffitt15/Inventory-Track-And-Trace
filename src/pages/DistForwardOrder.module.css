@@ -1,13 +1,8 @@
-form {
+.content {
     margin: 3%;
     padding: 1%;
     border: solid rgb(214, 214, 214);
     border-radius: 5px 5px;
-}
-
-.formGroup {
-    width: 50%;
-    margin: 1.5%;
 }
 
 .button {
@@ -25,3 +20,4 @@ form {
     justify-content: right;
     margin-right: 3%;
 }
+

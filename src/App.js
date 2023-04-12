@@ -59,7 +59,7 @@ function App() {
                     </Route>
 
                     {/* for customer */}
-                    {/* <Route path="/customer">
+                    <Route path="/customer">
                         <Route path="userId" element={<HomepageNavbar />}>
                             <Route path="orders" element={<OrderView role = "customer"/>}/>
                             <Route path="orders/forwarded/:orderId" element={<OrderDetails/>}/>
@@ -68,7 +68,7 @@ function App() {
                             <Route path="profile" element ={<Profile/>}/>
                             <Route path="*" element={<Error />}/>
                         </Route>
-                    </Route> */}
+                    </Route>
                     
 
                     <Route path="dist-inc-order" element={<DistIncomingOrder/>}/>

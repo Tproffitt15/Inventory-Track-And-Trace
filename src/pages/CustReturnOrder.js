@@ -1,4 +1,4 @@
-import styles from "./CreateOrder.module.css"
+import styles from "./CustReturnedOrder.module.css"
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from 'react-select';
@@ -6,13 +6,12 @@ import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
 
-const CreateOrder = () => {
+const CustReturnOrder = () => {
 
     const [drugs, setDrugs] = useState([]);
     const [selectedDrug, setSelectedDrug] = useState("");
     const [selectedDistributor, setSelectedDistributor] = useState("");
     const [selectedCustomer, setSelectedCustomer] = useState("");
-    const [pinataURL, setPinataURL] = useState("");
 
     useEffect(() => {
         // Call the OpenFDA API to get the list of drugs
@@ -51,42 +50,6 @@ const CreateOrder = () => {
         label: result.name,
         value: result.address
     }));
-
-
-    const uploadMetadataToIPFS = async (metadataJSON) => {
-
-        try {
-            //upload the metadata JSON to IPFS
-            const response = await uploadJSONToIPFS(metadataJSON);
-            if (response.success === true) {
-                console.log("Uploaded JSON to Pinata: ", response)
-                return response.pinataURL;
-            }
-        }
-        catch (e) {
-            console.log("error uploading JSON metadata:", e)
-        }
-    }
-
-    const mintOrderNFT = async (metadataURL, formAddresses) => {
-        try {
-            const ethers = require("ethers");
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            await window.ethereum.enable();
-            const signer = provider.getSigner();
-
-            let contract = new ethers.Contract(OrderJSON.address, OrderJSON.abi, signer)
-            const signerAddress = await signer.getAddress();
-            const addresses = [signerAddress, formAddresses[0], formAddresses[1]];
-
-            let transaction = await contract.createOrder(metadataURL, addresses);
-            await transaction.wait();
-            alert("Successfully listed your Order NFT!");
-        } catch (error) {
-            alert("Upload NFT error" + error);
-        }
-
-    }
 
 
     const handleFormSubmit = async (event) => {
@@ -182,4 +145,4 @@ const CreateOrder = () => {
     );
 };
 
-export default CreateOrder;
+export default CustReturnOrder;

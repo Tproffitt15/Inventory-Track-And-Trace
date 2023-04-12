@@ -40,18 +40,18 @@ const OrdersView = ( {role} ) => {
             }
         }
         // for customer
-        // else {
-        //     switch (selectedOption) {
-        //         case 1:
-        //             return <OrderTable filter="all" role="distributor" />;
-        //         case 2:
-        //             return <OrderTable filter="incoming" role="distributor" />;
-        //         case 3:
-        //             return <OrderTable filter="forwarded" role="distributor" />;
-        //         default:
-        //             return null;
-        //     }
-        // }
+        else {
+            switch (selectedOption) {
+                case 1:
+                    return <OrderTable filter="all" role="customer" />;
+                case 2:
+                    return <OrderTable filter="incoming" role="customer" />;
+                case 3:
+                    return <OrderTable filter="forwarded" role="customer" />;
+                default:
+                    return null;
+            }
+        }
         
     };
 
@@ -118,15 +118,17 @@ const OrdersView = ( {role} ) => {
                     <button onClick={() => setSelectedOption(2)} className={`${styles.orderNavbarOption} ${selectedOption === 2 ? styles.active : ''}`}>Incoming Orders</button>
                     <button onClick={() => setSelectedOption(3)} className={`${styles.orderNavbarOption} ${selectedOption === 3 ? styles.active : ''}`}>Forwarded Orders</button>
                 </div>
-                <div >
-                    <button className={styles.createOrder} onClick={() => routeChange()}>
-                        <img src={createOrderIcon} className={styles.createOrderIcon}></img>
-                        <div>
-                            <h3>Create New Order</h3>
-                            <h4>This will mint the NFT for you</h4>
-                        </div>                       
-                    </button>
-                </div>
+                {role === "manufacturer" ? (
+                    <div>
+                        <button className={styles.createOrder} onClick={() => routeChange()}>
+                            <img src={createOrderIcon} className={styles.createOrderIcon}></img>
+                            <div>
+                                <h3>Create New Order</h3>
+                                <h4>This will mint the NFT for you</h4>
+                            </div>                       
+                        </button>
+                    </div>
+                ) : null}
             </div>
             <div>
                 {renderOrderTable()}

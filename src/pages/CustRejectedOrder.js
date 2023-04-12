@@ -1,7 +1,7 @@
-import styles from "./DistIncomingOrder.module.css";
+import styles from "./CustRejectedOrder.module.css";
 import IncomingOrderTable from "components/IncomingOrderTable";
 
-const DistIncomingOrder = () => {
+const CustRejectedOrder = () => {
   const orderData = {
     "order_number": 1,
     "issue_date": "22/12/22",
@@ -13,12 +13,12 @@ const DistIncomingOrder = () => {
     "status": "completed"
   };
 
-    function receiveOrder () {
-        console.log("distributor received order, redirect to forward order");
+    function completeOrder () {
+        console.log("customer received order, flow finished");
     }
 
     function rejectOrder () {
-        console.log("distributor reject order, redirect to all orders");
+        console.log("customer reject order, redirect to return order");
     }
 
     return (
@@ -28,11 +28,11 @@ const DistIncomingOrder = () => {
                 <IncomingOrderTable orderData={orderData}/>
             </div>
             <div className={styles.buttonGroup}>
-                <button className={styles.button} onClick={rejectOrder()}>Reject</button>
-                <button className={styles.button} onClick={receiveOrder()}>Receive</button>
+                <button className={styles.button} onClick={rejectOrder()}>Edit</button>
+                <button className={styles.button} onClick={completeOrder()}>Return</button>
             </div>
         </div>
     );
 }
 
-export default DistIncomingOrder;
+export default CustRejectedOrder;
