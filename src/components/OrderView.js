@@ -3,10 +3,10 @@ import OrderJSON from "../order.json";
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import BigNumber from 'bignumber.js';
-
+import partiesData from "data/parties.json"
 import OrderTable from "./OrderTable";
 
-const OrdersView = () => {
+const OrdersView = ({ userRole }) => {
     const [data, updateData] = useState({});
     const [dataFetched, updateFetched] = useState(false);
     const [selectedOption, setSelectedOption] = useState(1);
@@ -23,6 +23,13 @@ const OrdersView = () => {
         }
     };
 
+    const navbarOptions = [
+        { label: 'All Orders', value: 'all' },
+        { label: 'Incoming Orders', value: 'incoming' },
+        { label: userRole === 'customer' ? 'Return Order' : 'Forwarded Orders', value: userRole === 'customer' ? 'return' : 'forwarded' },
+    ];
+
+
     const getAllNFT = async () => {
         console.log('getAllNFT called');
 
@@ -38,11 +45,11 @@ const OrdersView = () => {
         // console.log(transaction);
         const items = await Promise.all(
             transaction
-                // Test code, remove in production
-                .filter(i => {
-                    const currId = new BigNumber(i.orderId._hex);
-                    return currId.isGreaterThanOrEqualTo(12) && currId.isLessThanOrEqualTo(15);
-                })
+                // // Test code, remove in production
+                // .filter(i => {
+                //     const currId = new BigNumber(i.orderId._hex);
+                //     return currId.isGreaterThanOrEqualTo(12) && currId.isLessThanOrEqualTo(15);
+                // })
                 .map(async i => {
                     const tokenURI = await contract.tokenURI(i.orderId);
                     // Process tokenURI here
@@ -83,9 +90,28 @@ const OrdersView = () => {
         <>
             <h1> Order View </h1>
             <div className="orderNavbar">
-                <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
-                <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
-                <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Forwarded Orders</li>
+                {userRole === 0 && (
+                    <div>
+                        <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
+                        <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">In-Progress Orders</li>
+                        <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Forwarded Orders</li>
+                    </div>
+                )}
+                {userRole === 1 && (
+                    <div>
+                        <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
+                        <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
+                        <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Forwarded Orders</li>
+                    </div>
+                )}
+                {userRole === 2 && (
+                    <div>
+                        <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
+                        <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
+                        <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Return Orders</li>
+                    </div>
+                )}
+
             </div>
             <div>
                 {renderOrderTable()}

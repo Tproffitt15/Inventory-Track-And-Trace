@@ -1,5 +1,5 @@
 import './App.css';
-
+import { useWeb3React } from '@web3-react/core';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
@@ -12,7 +12,7 @@ import HomepageNavbar from './components/HomepageNavbar';
 import OrderView from './components/OrderView';
 import ConnectWallet from 'pages/ConnectWallet';
 import OrderDetails from 'pages/OrderDetails';
-
+import { useWalletAddress } from 'hooks/useWalletAddress';
 //testing
 import DistIncomingOrder from 'pages/DistIncomingOrder';
 import ManIncomingOrder from 'pages/ManIncomingOrder';
@@ -21,6 +21,10 @@ function App() {
     function getLibrary(provider) {
         return new Web3(provider)
     }
+
+    const walletAddress = useWalletAddress();
+    console.log(walletAddress);
+
     return (
         <Web3ReactProvider getLibrary={getLibrary}>
             <BrowserRouter>

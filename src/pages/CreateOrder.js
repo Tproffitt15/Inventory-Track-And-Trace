@@ -5,7 +5,7 @@ import Select from 'react-select';
 import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
-import { Modal, Spinner } from 'react-bootstrap';
+// import { Modal, Spinner } from 'react-bootstrap';
 
 const CreateOrder = () => {
 
@@ -36,6 +36,18 @@ const CreateOrder = () => {
     const handleDrugChange = (selectedDrug) => {
         setSelectedDrug(selectedDrug);
     };
+
+    const distributors = partiesData.filter((person) => person.role === 1);
+    const distributorOptions = distributors.map((distributor) => ({
+        label: distributor.name,
+        value: distributor.address,
+    }));
+
+    const customers = partiesData.filter((person) => person.role === 2);
+    const customerOptions = customers.map((distributor) => ({
+        label: distributor.name,
+        value: distributor.address,
+    }));
 
     const drugOptions = drugs.map((result) => ({
         label: result,
@@ -71,6 +83,16 @@ const CreateOrder = () => {
         }
     }
 
+    const getUserWalletAddress = async () => {
+        const ethers = require("ethers");
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        await window.ethereum.enable();
+        const signer = provider.getSigner();
+
+        const signerAddress = await signer.getAddress();
+        return signerAddress;
+    }
+
     const mintOrderNFT = async (metadataURL, formAddresses) => {
         try {
             const ethers = require("ethers");
@@ -86,9 +108,8 @@ const CreateOrder = () => {
             await transaction.wait();
             alert("Successfully listed your Order NFT!");
         } catch (error) {
-            alert("Upload NFT error" + error);
+            alert("Upload NFT error: " + error);
         }
-
     }
 
 
@@ -101,38 +122,41 @@ const CreateOrder = () => {
         const customer = selectedCustomer;
         const deliveryDate = event.target.elements.deliveryDate.value;
         const quantity = event.target.elements.quantity.value;
-        const currentDate = new Date().toLocaleDateString();
-        // console.log(currentDate);
+        const issueDate = new Date().toISOString().substring(0, 10);
+        const signerAddress = await getUserWalletAddress();
+        // console.log(drug);
         // do something with the form data, e.g. send it to the server
 
-        const order1 = { drug, distributor, customer, deliveryDate };
-        console.log("Debug ", order1);
         const order = {
-            issueDate: currentDate,
+            drug: drug.value,
+            issueDate: issueDate,
             expectedDate: deliveryDate,
-            distributor: distributor.label,
-            customer: customer.label
+            distributor: distributor.value,
+            customer: customer.value,
+            manufacturer: signerAddress,
+            quantity: quantity
         };
+
+        console.log(order);
+
         const metadataURL = await uploadMetadataToIPFS(order);
 
-        // console.log(metadataURL);
         setShowModal(true);
         await mintOrderNFT(metadataURL, [distributor.value, customer.value]);
         setShowModal(false);
 
-        // setPinataURL(metadataURL);
     };
 
 
     return (
-        <section class="container">
+        <section className="container">
             <h2>Create New Order</h2>
             <form onSubmit={handleFormSubmit}>
-                <div class="form-group">
-                    <label for="drugSelect">Search for a drug</label>
+                <div className="form-group">
+                    <label htmlFor="drugSelect">Search for a drug</label>
                     <Select
                         id="drugSelect"
-                        class="form-control"
+                        className="form-control"
                         options={drugOptions}
                         value={selectedDrug}
                         onChange={handleDrugChange}
@@ -140,39 +164,39 @@ const CreateOrder = () => {
                     />
                 </div>
 
-                <div class="form-group">
-                    <label for="distributorSelect">Choose distributor</label>
+                <div className="form-group">
+                    <label htmlFor="distributorSelect">Choose distributor</label>
                     <Select
                         id="distributorSelect"
-                        class="form-control"
-                        options={partiesOptions}
+                        className="form-control"
+                        options={distributorOptions}
                         value={selectedDistributor}
                         onChange={handleDistributorChange}
                         isSearchable={true}
                     />
                 </div>
 
-                <div class="form-group">
-                    <label for="customerSelect">Choose customer</label>
+                <div className="form-group">
+                    <label htmlFor="customerSelect">Choose customer</label>
                     <Select
                         id="customerSelect"
-                        class="form-control"
-                        options={partiesOptions}
+                        className="form-control"
+                        options={customerOptions}
                         value={selectedCustomer}
                         onChange={handleCustomerChange}
                         isSearchable={true}
                     />
                 </div>
                 <div>
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" class="form-control" />
+                    <label htmlFor="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" className="form-control" />
                 </div>
-                <div class="form-group">
-                    <label for="deliveryDate">Deliver By</label>
-                    <input type="date" id="deliveryDate" name="deliveryDate" class="form-control" />
+                <div className="form-group">
+                    <label htmlFor="deliveryDate">Deliver By</label>
+                    <input type="date" id="deliveryDate" name="deliveryDate" className="form-control" />
                 </div>
 
-                <button type="submit" id="submitButton" class="btn btn-primary float-left create">Create Order</button>
+                <button type="submit" id="submitButton" className="btn btn-primary float-left create">Create Order</button>
             </form>
 
             {/* {pinataURL && (

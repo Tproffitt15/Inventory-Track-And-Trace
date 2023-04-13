@@ -24,7 +24,7 @@ const main = async () => {
         abi: JSON.parse(nftContract.interface.format('json'))
     }
 
-    fs.writeFileSync('../src/order.json', JSON.stringify(data))
+    fs.writeFileSync('./src/order.json', JSON.stringify(data))
 };
 
 const runMain = async () => {

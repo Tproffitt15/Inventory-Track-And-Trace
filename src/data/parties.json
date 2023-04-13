@@ -2,7 +2,7 @@
     {
         "name": "TroyP",
         "address": "0x91cA5725534e855FF69Ba8F2b651FaDD848B8D24",
-        "role": 0
+        "role": 2
     },
     {
         "name": "HieuH",
@@ -12,6 +12,21 @@
     {
         "name": "BachT",
         "address": "0x0669306140d16EaF8cbF3aDF6122e9502622f078",
+        "role": 0
+    },
+    {
+        "name": "NhiN",
+        "address": "0xC4F01F6452b7Bf5912574A2c848f0823AA92DB05",
         "role": 2
+    },
+    {
+        "name": "SeniorCustomer",
+        "address": "0xAbe8a2dF5D60310713b6cd5fd1C66e1757F6ec34",
+        "role": 2
+    },
+    {
+        "name": "CatchAll",
+        "address": "0xf1999f4755F42A2f9D03DD33F6bc7F7D724c6F42",
+        "role": 3
     }
 ]

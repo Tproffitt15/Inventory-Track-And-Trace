@@ -1,5 +1,5 @@
 {
-    "address": "0xbd4E7F374511b228192494862d4e2fb726Dfd31E",
+    "address": "0x0DfC11445E13E46D46cB454b956AC111e770c9aB",
     "abi": [
         {
             "type": "constructor",
@@ -157,10 +157,6 @@
                         {
                             "type": "uint256",
                             "name": "orderId"
-                        },
-                        {
-                            "type": "uint8",
-                            "name": "location"
                         },
                         {
                             "type": "uint8",
@@ -377,10 +373,6 @@
                 {
                     "type": "uint8",
                     "name": "_status"
-                },
-                {
-                    "type": "uint8",
-                    "name": "_location"
                 }
             ],
             "outputs": []
