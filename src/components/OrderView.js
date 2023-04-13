@@ -13,22 +13,15 @@ const OrdersView = ({ userRole }) => {
     const renderOrderTable = () => {
         switch (selectedOption) {
             case 1:
-                return <OrderTable filter="all" />;
+                return <OrderTable filter="1st" role={userRole} data={data} />;
             case 2:
-                return <OrderTable filter="incoming" />;
+                return <OrderTable filter="2nd" role={userRole} data={data} />;
             case 3:
-                return <OrderTable filter="forwarded" />;
+                return <OrderTable filter="3rd" role={userRole} data={data} />;
             default:
                 return null;
         }
     };
-
-    const navbarOptions = [
-        { label: 'All Orders', value: 'all' },
-        { label: 'Incoming Orders', value: 'incoming' },
-        { label: userRole === 'customer' ? 'Return Order' : 'Forwarded Orders', value: userRole === 'customer' ? 'return' : 'forwarded' },
-    ];
-
 
     const getAllNFT = async () => {
         console.log('getAllNFT called');
@@ -64,8 +57,8 @@ const OrdersView = ({ userRole }) => {
                         expectedDate: response.expectedDate,
                         distributor: response.distributor,
                         customer: response.customer,
+                        manufacturer: response.manufacturer,
                         status: i.status,
-                        location: i.location
                     }
 
                     // console.log(item);
@@ -116,7 +109,6 @@ const OrdersView = ({ userRole }) => {
             <div>
                 {renderOrderTable()}
             </div>
-            {/* <Outlet/> */}
         </>
     )
 }

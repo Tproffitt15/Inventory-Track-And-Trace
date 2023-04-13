@@ -5,6 +5,8 @@ import Select from 'react-select';
 import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
+import { useWalletAddress } from 'hooks/useWalletAddress';
+
 // import { Modal, Spinner } from 'react-bootstrap';
 
 const CreateOrder = () => {
@@ -14,7 +16,7 @@ const CreateOrder = () => {
     const [selectedDistributor, setSelectedDistributor] = useState("");
     const [selectedCustomer, setSelectedCustomer] = useState("");
     const [showModal, setShowModal] = useState(false);
-
+    const signerAddress = useWalletAddress();
     // const [pinataURL, setPinataURL] = useState("");
 
     useEffect(() => {
@@ -62,11 +64,6 @@ const CreateOrder = () => {
         setSelectedCustomer(selectedCustomer);
     };
 
-    const partiesOptions = partiesData.map((result) => ({
-        label: result.name,
-        value: result.address
-    }));
-
 
     const uploadMetadataToIPFS = async (metadataJSON) => {
 
@@ -83,15 +80,7 @@ const CreateOrder = () => {
         }
     }
 
-    const getUserWalletAddress = async () => {
-        const ethers = require("ethers");
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        await window.ethereum.enable();
-        const signer = provider.getSigner();
 
-        const signerAddress = await signer.getAddress();
-        return signerAddress;
-    }
 
     const mintOrderNFT = async (metadataURL, formAddresses) => {
         try {
@@ -123,7 +112,7 @@ const CreateOrder = () => {
         const deliveryDate = event.target.elements.deliveryDate.value;
         const quantity = event.target.elements.quantity.value;
         const issueDate = new Date().toISOString().substring(0, 10);
-        const signerAddress = await getUserWalletAddress();
+
         // console.log(drug);
         // do something with the form data, e.g. send it to the server
 

@@ -13,6 +13,7 @@ import OrderView from './components/OrderView';
 import ConnectWallet from 'pages/ConnectWallet';
 import OrderDetails from 'pages/OrderDetails';
 import { useWalletAddress } from 'hooks/useWalletAddress';
+import { useGetUserRole } from 'hooks/useGetUserRole';
 //testing
 import DistIncomingOrder from 'pages/DistIncomingOrder';
 import ManIncomingOrder from 'pages/ManIncomingOrder';
@@ -23,7 +24,8 @@ function App() {
     }
 
     const walletAddress = useWalletAddress();
-    console.log(walletAddress);
+    const userRole = useGetUserRole(walletAddress);
+    console.log(walletAddress, userRole);
 
     return (
         <Web3ReactProvider getLibrary={getLibrary}>
@@ -42,7 +44,7 @@ function App() {
                     <Route path="/connect" element={<ConnectWallet />} />
                     <Route path="/manufacturer">
                         <Route path="userId" element={<HomepageNavbar />}>
-                            <Route path="orders" element={<OrderView />} />
+                            <Route path="orders" element={<OrderView userRole={userRole} />} />
                             <Route path="orders/:orderId" element={<OrderDetails />} />
                             <Route path="profile" element={<Profile />} />
                             <Route path="create-order" element={<CreateOrder />} />

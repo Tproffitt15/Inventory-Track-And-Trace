@@ -13,13 +13,13 @@ contract OrderNFT is ERC721 {
     Counters.Counter private _orderIds;
 
     enum Status {
-        ManufacturerShipped,
-        DistributorReceived,
-        DistributorForwarded,
-        DistributorDecline,
-        CustomerReject,
-        CustomerComplete,
-        CustomerReturn
+        ManufacturerShipped, // 0
+        DistributorReceived, // 1
+        DistributorForwarded, // 2
+        DistributorDecline, // 3
+        CustomerReject, // 4
+        CustomerComplete, // 5
+        CustomerReturn // 6
     }
 
     struct Order {
