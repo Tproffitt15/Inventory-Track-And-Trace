@@ -15,7 +15,14 @@ import OrderDetails from 'pages/OrderDetails';
 
 //testing
 import DistIncomingOrder from 'pages/DistIncomingOrder';
+import DistForwardOrder from 'pages/DistForwardOrder';
+import DistForwardedOrder from 'pages/DistForwardedOrder';
 import ManIncomingOrder from 'pages/ManIncomingOrder';
+import CustIncomingOrder from 'pages/CustIncomingOrder';
+import CustRejectOrder from 'pages/CustRejectOrder';
+import CustReturnOrder from 'pages/CustReturnOrder';
+import CustRejectedOrder from 'pages/CustRejectedOrder';
+import CustReturnedOrder from 'pages/CustReturnedOrder';
 
 function App() {
     function getLibrary(provider) {
@@ -33,8 +40,8 @@ function App() {
                     */}
                     
 
-                    {/* <Route path="/signin" element={<Signin />} /> */}
-                    <Route path="/" element={<Signup />} />
+                                        {/* <Route path="/signin" element={<Signin />} /> */}
+                                        <Route path="/" element={<Signup />} />
                     <Route path="/connect" element={<ConnectWallet />} />
                     <Route path="/manufacturer">
                         <Route path="userId" element={<HomepageNavbar />}>
@@ -47,12 +54,20 @@ function App() {
                         </Route>
                     </Route>
 
+                    <Route path="CustReturnOrder" element={<CustReturnOrder />}/>
+                    <Route path="CustReturnedOrder" element={<CustReturnedOrder />}/>
+                    <Route path="CustRejectOrder" element={<CustRejectOrder />}/>
+                    <Route path="DistForwardedOrder" element={<DistForwardedOrder />}/>
+                    <Route path="DistForwardOrder" element={<DistForwardOrder />}/>
+                    <Route path="DistIncomingOrder" element={<DistIncomingOrder />}/>
+
+
                     <Route path="/distributor">
                         <Route path="userId" element={<HomepageNavbar />}>
                             <Route path="orders" element={<OrderView role = "distributor"/>}/>
-                            <Route path="orders/forwarded/:orderId" element={<OrderDetails/>}/>
+                            <Route path="orders/forwarded/:orderId" element={<DistForwardOrder/>}/>
                             <Route path="orders/incoming/:orderId" element={<DistIncomingOrder/>}/>
-                            <Route path="orders/completed/:orderId" element={<OrderDetails/>}/>
+                            <Route path="orders/completed/:orderId" element={<DistForwardedOrder/>}/>
                             <Route path="profile" element ={<Profile/>}/>
                             <Route path="*" element={<Error />}/>
                         </Route>
@@ -62,18 +77,14 @@ function App() {
                     <Route path="/customer">
                         <Route path="userId" element={<HomepageNavbar />}>
                             <Route path="orders" element={<OrderView role = "customer"/>}/>
-                            <Route path="orders/forwarded/:orderId" element={<OrderDetails/>}/>
-                            <Route path="orders/incoming/:orderId" element={<OrderDetails/>}/>
-                            <Route path="orders/completed/:orderId" element={<OrderDetails/>}/>
+                            <Route path="orders/forwarded/:orderId" element={<CustRejectOrder/>}/> 
+                            <Route path="orders/incoming/:orderId" element={<CustIncomingOrder/>}/>
+                            <Route path="orders/completed/:orderId" element={<CustReturnOrder/>}/>
                             <Route path="profile" element ={<Profile/>}/>
                             <Route path="*" element={<Error />}/>
                         </Route>
                     </Route>
-                    
-
-                    <Route path="dist-inc-order" element={<DistIncomingOrder/>}/>
-                    <Route path="man-inc-order" element={<ManIncomingOrder/>}/>
-                    
+                                        
                     {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
                     {/* <Route path="*" element={<Error />}/> */}
                     <Route path="*" element={<Error />}/>

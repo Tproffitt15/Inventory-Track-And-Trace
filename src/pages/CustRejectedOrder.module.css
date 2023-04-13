@@ -10,7 +10,7 @@
     padding: 2%;
     border: solid rgb(214, 214, 214);
     border-radius: 20px 20px;
-    background-color: rgb(151, 1, 1);
+    background-color: #B21B1B;
     color: white;
     font-size: 16px;
 }
@@ -20,4 +20,5 @@
     justify-content: right;
     margin-right: 3%;
 }
+
 

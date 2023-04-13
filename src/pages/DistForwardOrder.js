@@ -23,7 +23,7 @@ const DistForwardOrder = () => {
 
     return (
         <div className="container">
-            <h1> Incoming Order From [Distributor]</h1>
+            <h1> Forward Order Number #00001</h1>
             <div className={styles.content}>
                 <IncomingOrderTable orderData={orderData}/>
             </div>

@@ -25,7 +25,8 @@ const CustRejectOrder = () => {
         <div className="container">
             <h1> Reject an Order</h1>
             <div className={styles.content}>
-                <input type="textbox"></input>
+                <label htmlFor="rejectReason">Enter Reason for Rejecting</label>
+                <textarea className="rejectReasonText" placeholder="Enter Reason here... " type="text" required maxlength="500" size="500" cols="100" rows="20"></textarea>
             </div>
             <div className={styles.buttonGroup}>
                 <button className={styles.button} onClick={rejectOrder()}>Finish</button>

@@ -2,22 +2,22 @@ import styles from "./CustRejectedOrder.module.css";
 import IncomingOrderTable from "components/IncomingOrderTable";
 
 const CustRejectedOrder = () => {
-  const orderData = {
-    "order_number": 1,
-    "issue_date": "22/12/22",
-    "expected_date": "23/01/22",
-    "manufacturer": "Cardinal Health",
-    "customer": "Miami Uni",
-    "tracking_number": "12984791",
-    "tracking_URL": "tracking_URL.com",
-    "status": "completed"
-  };
+    const orderData = {
+        "order_number": 1,
+        "issue_date": "22/12/22",
+        "expected_date": "23/01/22",
+        "manufacturer": "Cardinal Health",
+        "customer": "Miami Uni",
+        "tracking_number": "12984791",
+        "tracking_URL": "tracking_URL.com",
+        "status": "completed"
+    };
 
-    function completeOrder () {
+    function completeOrder() {
         console.log("customer received order, flow finished");
     }
 
-    function rejectOrder () {
+    function rejectOrder() {
         console.log("customer reject order, redirect to return order");
     }
 
