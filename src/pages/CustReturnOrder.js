@@ -1,4 +1,4 @@
-import styles from "./CustReturnedOrder.module.css"
+import styles from "./CustReturnOrder.module.css"
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from 'react-select';
@@ -73,17 +73,17 @@ const CustReturnOrder = () => {
             quantity: quantity
         };
         // const addresses = [walletAddress1, walletAddress2, walletAddress3];
-        const metadataURL = await uploadMetadataToIPFS(order);
+        // const metadataURL = await uploadMetadataToIPFS(order);
 
-        // console.log(metadataURL);
-        mintOrderNFT(metadataURL, [distributor.value, customer.value]);
-        setPinataURL(metadataURL);
+        // // console.log(metadataURL);
+        // mintOrderNFT(metadataURL, [distributor.value, customer.value]);
+        // setPinataURL(metadataURL);
     };
 
 
     return (
         <div className="container">
-            <h1>Create New Order</h1>
+            <h1>Create A Return Order</h1>
             <form onSubmit={handleFormSubmit}>
                 <div className={styles.formGroup}>
                     <label htmlFor="drugSelect">Search for a drug</label>
