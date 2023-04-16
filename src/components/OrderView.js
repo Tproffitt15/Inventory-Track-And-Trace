@@ -21,7 +21,7 @@ const OrdersView = ( {role} ) => {
                 case 2:
                     return <OrderTable filter="incoming" role="manufacturer" />;
                 case 3:
-                    return <OrderTable filter="forwarded" role="manufacturer" />;
+                    return <OrderTable filter="completed" role="manufacturer" />;
                 default:
                     return null;
             }
