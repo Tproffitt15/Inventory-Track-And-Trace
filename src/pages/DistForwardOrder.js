@@ -1,7 +1,7 @@
-import styles from "./DistIncomingOrder.module.css";
-import IncomingOrderTable from "components/IncomingOrderTable";
+import styles from "./DistForwardOrder.module.css";
+import IncomingOrderTable from "components/IncomingOrderTable"; // might create a separate OrderTable component
 
-const DistIncomingOrder = () => {
+const DistForwardOrder = () => {
   const orderData = {
     "order_number": 1,
     "issue_date": "22/12/22",
@@ -13,26 +13,26 @@ const DistIncomingOrder = () => {
     "status": "completed"
   };
 
-    function receiveOrder () {
+    function forwardOrder () {
         console.log("distributor received order, redirect to forward order");
     }
 
-    function rejectOrder () {
+    function cancel () {
         console.log("distributor reject order, redirect to all orders");
     }
 
     return (
         <div className="container">
-            <h1> Incoming Order From [Manufacturer]</h1>
+            <h1> Forward Order Number #00001</h1>
             <div className={styles.content}>
                 <IncomingOrderTable orderData={orderData}/>
             </div>
             <div className={styles.buttonGroup}>
-                <button className={styles.button} onClick={rejectOrder()}>Reject</button>
-                <button className={styles.button} onClick={receiveOrder()}>Receive</button>
+                <button className={styles.button} onClick={cancel()}>Cancel</button>
+                <button className={styles.button} onClick={forwardOrder()}>Forward</button>
             </div>
         </div>
     );
 }
 
-export default DistIncomingOrder;
+export default DistForwardOrder;

@@ -1,10 +1,7 @@
-import "./ManIncomingOrder.css"
+import styles from "./DistForwardedOrder.module.css";
+import IncomingOrderTable from "components/IncomingOrderTable"; // might create a separate OrderTable component
 
-import IncomingOrderTable from "components/IncomingOrderTable"
-
-const ManIncomingOrder = () => {
-    // orderData is 1 object since this page is showing details on 1 order
-    // placeholder for an object
+const DistIncomingOrder = () => {
     const orderData = {
         "order_number": 1,
         "issue_date": "22/12/22",
@@ -14,18 +11,16 @@ const ManIncomingOrder = () => {
         "tracking_number": "12984791",
         "tracking_URL": "tracking_URL.com",
         "status": "completed"
-        };
+    };
 
     return (
         <div className="container">
             <h1> Incoming Order From [Manufacturer]</h1>
-            <div className="content">
+            <div className={styles.content}>
                 <IncomingOrderTable orderData={orderData}/>
             </div>
-            <button id="declineButton">Decline</button>
-            <button id="receiveButton">Receive</button>
         </div>
     );
 }
 
-export default ManIncomingOrder;
+export default DistIncomingOrder;

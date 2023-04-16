@@ -1,10 +1,13 @@
-import "./OrderView.css"
+import styles from "./OrderView.module.css"
+import createOrderIcon from "../assets/create-order-icon.png"
 import OrderJSON from "../order.json";
+import OrderTable from "./OrderTable";
+
 import React, { useState } from 'react';
 import axios from "axios";
 import BigNumber from 'bignumber.js';
+import { Link, useNavigate } from "react-router-dom";
 
-import OrderTable from "./OrderTable";
 
 const OrdersView = ( {role} ) => {
     const [data, updateData] = useState({});
@@ -37,18 +40,18 @@ const OrdersView = ( {role} ) => {
             }
         }
         // for customer
-        // else {
-        //     switch (selectedOption) {
-        //         case 1:
-        //             return <OrderTable filter="all" role="distributor" />;
-        //         case 2:
-        //             return <OrderTable filter="incoming" role="distributor" />;
-        //         case 3:
-        //             return <OrderTable filter="forwarded" role="distributor" />;
-        //         default:
-        //             return null;
-        //     }
-        // }
+        else {
+            switch (selectedOption) {
+                case 1:
+                    return <OrderTable filter="all" role="customer" />;
+                case 2:
+                    return <OrderTable filter="incoming" role="customer" />;
+                case 3:
+                    return <OrderTable filter="forwarded" role="customer" />;
+                default:
+                    return null;
+            }
+        }
         
     };
 
@@ -102,13 +105,30 @@ const OrdersView = ( {role} ) => {
     // if (!dataFetched)
     getAllNFT();
 
+    let navigate = useNavigate(); 
+    const routeChange = () => { 
+        navigate("../create-order");
+    }
+
     return (
         <>
-            <h1> Order View </h1>
-            <div className="orderNavbar">
-                <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
-                <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
-                <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Forwarded Orders</li>
+            <div className={styles.orderNavbar}>
+                <div className={styles.orderNavbarOptions}>
+                    <button onClick={() => setSelectedOption(1)} className={`${styles.orderNavbarOption} ${selectedOption === 1 ? styles.active : ''}`}>All Orders</button>
+                    <button onClick={() => setSelectedOption(2)} className={`${styles.orderNavbarOption} ${selectedOption === 2 ? styles.active : ''}`}>Incoming Orders</button>
+                    <button onClick={() => setSelectedOption(3)} className={`${styles.orderNavbarOption} ${selectedOption === 3 ? styles.active : ''}`}>Forwarded Orders</button>
+                </div>
+                {role === "manufacturer" ? (
+                    <div>
+                        <button className={styles.createOrder} onClick={() => routeChange()}>
+                            <img src={createOrderIcon} className={styles.createOrderIcon}></img>
+                            <div>
+                                <h3>Create New Order</h3>
+                                <h4>This will mint the NFT for you</h4>
+                            </div>                       
+                        </button>
+                    </div>
+                ) : null}
             </div>
             <div>
                 {renderOrderTable()}

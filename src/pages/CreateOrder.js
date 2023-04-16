@@ -1,4 +1,4 @@
-import "./CreateOrder.css"
+import styles from "./CreateOrder.module.css"
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Select from 'react-select';
@@ -119,11 +119,11 @@ const CreateOrder = () => {
 
 
     return (
-        <div class="container">
+        <div className="container">
             <h1>Create New Order</h1>
             <form onSubmit={handleFormSubmit}>
-                <div class="form-group">
-                    <label for="drugSelect">Search for a drug</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="drugSelect">Search for a drug</label>
                     <Select
                         id="drugSelect"
                         class="form-control"
@@ -134,8 +134,8 @@ const CreateOrder = () => {
                     />
                 </div>
 
-                <div class="form-group">
-                    <label for="distributorSelect">Choose distributor</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="distributorSelect">Choose distributor</label>
                     <Select
                         id="distributorSelect"
                         class="form-control"
@@ -146,8 +146,8 @@ const CreateOrder = () => {
                     />
                 </div>
 
-                <div class="form-group">
-                    <label for="customerSelect">Choose customer</label>
+                <div className={styles.formGroup}>
+                    <label htmlFor="customerSelect">Choose customer</label>
                     <Select
                         id="customerSelect"
                         class="form-control"
@@ -157,17 +157,20 @@ const CreateOrder = () => {
                         isSearchable={true}
                     />
                 </div>
-                <div>
-                    <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label for="deliveryDate">Deliver By</label>
-                    <input type="date" id="deliveryDate" name="deliveryDate" class="form-control" />
+                <div className={styles.formGroup}>
+                    <label htmlFor="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" className="form-control" />
                 </div>
 
-                <button type="submit" id="submitButton" class="btn btn-primary float-left create">Create Order</button>
+                <div className={styles.formGroup}>
+                    <label htmlFor="deliveryDate">Deliver By</label>
+                    <input type="date" id="deliveryDate" name="deliveryDate" className="form-control" />
+                </div>
             </form>
+            <div className={styles.buttonGroup}>
+                <button id="submitButton" className={styles.button}>Cancel</button>
+                <button type="submit" id="submitButton" className={styles.button}>Create Order</button>
+            </div>
 
             {/* {pinataURL && (
                 <div id="upload-success">

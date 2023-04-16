@@ -1,0 +1,27 @@
+form {
+    margin: 3%;
+    padding: 1%;
+    border: solid rgb(214, 214, 214);
+    border-radius: 5px 5px;
+}
+
+.formGroup {
+    width: 50%;
+    margin: 1.5%;
+}
+
+.button {
+    margin: 1%;
+    padding: 2%;
+    border: solid rgb(214, 214, 214);
+    border-radius: 20px 20px;
+    background-color: #B21B1B;
+    color: white;
+    font-size: 16px;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: right;
+    margin-right: 3%;
+}

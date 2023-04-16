@@ -10,18 +10,22 @@ function OrderDetailsTable({ orderId }) {
     const keys = Object.keys(order);
     console.log(order);
     return (
-        <table>
-            <tbody>
-                {keys.map((key) => {
-                    return (
-                        <tr key={key}>
-                            <td>{formatPropertyName(key)}</td>
-                            <td>{order[key]}</td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table>
+        <div className="container">
+            <div className="tracking-details">
+                <table>
+                    <tbody>
+                        {keys.map((key) => {
+                            return (
+                                <tr key={key}>
+                                    <td>{formatPropertyName(key)}</td>
+                                    <td>{order[key]}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
 }
 

@@ -1,0 +1,48 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid black;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    float: right;
+    padding: 5px 15px;
+}
+
+li a {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+li a:hover {
+    cursor: pointer;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.icon {
+    width: 30px;   
+    text-align: center;
+} 
+
+.cardinalLogo {
+    width: 165px;
+}
