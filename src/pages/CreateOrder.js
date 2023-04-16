@@ -5,6 +5,9 @@ import Select from 'react-select';
 import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
+import { useWalletAddress } from 'hooks/useWalletAddress';
+
+// import { Modal, Spinner } from 'react-bootstrap';
 
 const CreateOrder = () => {
 
@@ -12,7 +15,9 @@ const CreateOrder = () => {
     const [selectedDrug, setSelectedDrug] = useState("");
     const [selectedDistributor, setSelectedDistributor] = useState("");
     const [selectedCustomer, setSelectedCustomer] = useState("");
-    const [pinataURL, setPinataURL] = useState("");
+    const [showModal, setShowModal] = useState(false);
+    const signerAddress = useWalletAddress();
+    // const [pinataURL, setPinataURL] = useState("");
 
     useEffect(() => {
         // Call the OpenFDA API to get the list of drugs
@@ -34,6 +39,18 @@ const CreateOrder = () => {
         setSelectedDrug(selectedDrug);
     };
 
+    const distributors = partiesData.filter((person) => person.role === 1);
+    const distributorOptions = distributors.map((distributor) => ({
+        label: distributor.name,
+        value: distributor.address,
+    }));
+
+    const customers = partiesData.filter((person) => person.role === 2);
+    const customerOptions = customers.map((distributor) => ({
+        label: distributor.name,
+        value: distributor.address,
+    }));
+
     const drugOptions = drugs.map((result) => ({
         label: result,
         value: result,
@@ -46,11 +63,6 @@ const CreateOrder = () => {
     const handleCustomerChange = (selectedCustomer) => {
         setSelectedCustomer(selectedCustomer);
     };
-
-    const partiesOptions = partiesData.map((result) => ({
-        label: result.name,
-        value: result.address
-    }));
 
 
     const uploadMetadataToIPFS = async (metadataJSON) => {
@@ -68,6 +80,8 @@ const CreateOrder = () => {
         }
     }
 
+
+
     const mintOrderNFT = async (metadataURL, formAddresses) => {
         try {
             const ethers = require("ethers");
@@ -83,9 +97,8 @@ const CreateOrder = () => {
             await transaction.wait();
             alert("Successfully listed your Order NFT!");
         } catch (error) {
-            alert("Upload NFT error" + error);
+            alert("Upload NFT error: " + error);
         }
-
     }
 
 
@@ -98,23 +111,29 @@ const CreateOrder = () => {
         const customer = selectedCustomer;
         const deliveryDate = event.target.elements.deliveryDate.value;
         const quantity = event.target.elements.quantity.value;
+        const issueDate = new Date().toISOString().substring(0, 10);
 
+        // console.log(drug);
         // do something with the form data, e.g. send it to the server
 
-        const order1 = { drug, distributor, customer, deliveryDate };
-        console.log(order1);
         const order = {
-            name: `${customer.label}'s ${drug.label} Order`,
-            description: `${customer.label} order ${quantity} of ${drug.label} from ${distributor.label}`,
-            estimatedDate: deliveryDate,
+            drug: drug.value,
+            issueDate: issueDate,
+            expectedDate: deliveryDate,
+            distributor: distributor.value,
+            customer: customer.value,
+            manufacturer: signerAddress,
             quantity: quantity
         };
-        // const addresses = [walletAddress1, walletAddress2, walletAddress3];
+
+        console.log(order);
+
         const metadataURL = await uploadMetadataToIPFS(order);
 
-        // console.log(metadataURL);
-        mintOrderNFT(metadataURL, [distributor.value, customer.value]);
-        setPinataURL(metadataURL);
+        setShowModal(true);
+        await mintOrderNFT(metadataURL, [distributor.value, customer.value]);
+        setShowModal(false);
+
     };
 
 
@@ -126,7 +145,7 @@ const CreateOrder = () => {
                     <label htmlFor="drugSelect">Search for a drug</label>
                     <Select
                         id="drugSelect"
-                        class="form-control"
+                        className="form-control"
                         options={drugOptions}
                         value={selectedDrug}
                         onChange={handleDrugChange}
@@ -138,8 +157,8 @@ const CreateOrder = () => {
                     <label htmlFor="distributorSelect">Choose distributor</label>
                     <Select
                         id="distributorSelect"
-                        class="form-control"
-                        options={partiesOptions}
+                        className="form-control"
+                        options={distributorOptions}
                         value={selectedDistributor}
                         onChange={handleDistributorChange}
                         isSearchable={true}
@@ -150,8 +169,8 @@ const CreateOrder = () => {
                     <label htmlFor="customerSelect">Choose customer</label>
                     <Select
                         id="customerSelect"
-                        class="form-control"
-                        options={partiesOptions}
+                        className="form-control"
+                        options={customerOptions}
                         value={selectedCustomer}
                         onChange={handleCustomerChange}
                         isSearchable={true}
@@ -166,19 +185,29 @@ const CreateOrder = () => {
                     <label htmlFor="deliveryDate">Deliver By</label>
                     <input type="date" id="deliveryDate" name="deliveryDate" className="form-control" />
                 </div>
+                {/* <button type="submit" id="submitButton" className="btn btn-primary float-left create">Create Order</button> */}
+                <div className={styles.buttonGroup}>
+                    {/* <button id="submitButton" className={styles.button}>Cancel</button> */}
+                    <button type="submit" id="submitButton" className={styles.button}>Create Order</button>
+                </div>
             </form>
-            <div className={styles.buttonGroup}>
-                <button id="submitButton" className={styles.button}>Cancel</button>
-                <button type="submit" id="submitButton" className={styles.button}>Create Order</button>
-            </div>
+
 
             {/* {pinataURL && (
                 <div id="upload-success">
                     Order metadata uploaded to IPFS: <a href={pinataURL}>{pinataURL}</a>
                 </div>
             )} */}
-        </div>
 
+            {showModal && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <div className="spinner"></div>
+                        <p className="loading-text">Please do not close or refresh the tab while your NFT is being minted...</p>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 };
 

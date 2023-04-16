@@ -1,5 +1,5 @@
 import './App.css';
-
+import { useWeb3React } from '@web3-react/core';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Web3ReactProvider } from '@web3-react/core'
 import Web3 from 'web3'
@@ -12,22 +12,29 @@ import HomepageNavbar from './components/HomepageNavbar';
 import OrderView from './components/OrderView';
 import ConnectWallet from 'pages/ConnectWallet';
 import OrderDetails from 'pages/OrderDetails';
+import { useWalletAddress } from 'hooks/useWalletAddress';
+import { useGetUserRole } from 'hooks/useGetUserRole';
 
 //testing
-import DistIncomingOrder from 'pages/DistIncomingOrder';
-import DistForwardOrder from 'pages/DistForwardOrder';
-import DistForwardedOrder from 'pages/DistForwardedOrder';
-import ManIncomingOrder from 'pages/ManIncomingOrder';
-import CustIncomingOrder from 'pages/CustIncomingOrder';
-import CustRejectOrder from 'pages/CustRejectOrder';
-import CustReturnOrder from 'pages/CustReturnOrder';
-import CustRejectedOrder from 'pages/CustRejectedOrder';
-import CustReturnedOrder from 'pages/CustReturnedOrder';
+// import DistIncomingOrder from 'pages/DistIncomingOrder';
+// import DistForwardOrder from 'pages/DistForwardOrder';
+// import DistForwardedOrder from 'pages/DistForwardedOrder';
+// import ManIncomingOrder from 'pages/ManIncomingOrder';
+// import CustIncomingOrder from 'pages/CustIncomingOrder';
+// import CustRejectOrder from 'pages/CustRejectOrder';
+// import CustReturnOrder from 'pages/CustReturnOrder';
+// import CustRejectedOrder from 'pages/CustRejectedOrder';
+// import CustReturnedOrder from 'pages/CustReturnedOrder';
 
 function App() {
     function getLibrary(provider) {
         return new Web3(provider)
     }
+
+    const walletAddress = useWalletAddress();
+    const userRole = useGetUserRole(walletAddress);
+    console.log(walletAddress, userRole);
+
     return (
         <Web3ReactProvider getLibrary={getLibrary}>
             <BrowserRouter>
@@ -38,31 +45,36 @@ function App() {
                                 distributor/:id/all-orders
                                 etc.
                     */}
-                    
 
-                                        {/* <Route path="/signin" element={<Signin />} /> */}
-                                        <Route path="/" element={<Signup />} />
+
+                    {/* <Route path="/signin" element={<Signin />} /> */}
+                    <Route path="/" element={<Signup />} />
                     <Route path="/connect" element={<ConnectWallet />} />
-                    <Route path="/manufacturer">
-                        <Route path="userId" element={<HomepageNavbar />}>
-                            <Route path="orders" element={<OrderView role = "manufacturer"/>}/>
-                            <Route path="orders/:orderId" element={<OrderDetails/>}/>
-                            <Route path="orders/*/:orderId" element={<Navigate replace to ="orders/:orderId" />}/>
-                            <Route path="profile" element ={<Profile/>}/>
-                            <Route path="create-order" element={<CreateOrder />} />
-                            <Route path="*" element={<Error />}/>
-                        </Route>
-                    </Route>
+                    {/* <Route path="/manufacturer"> */}
+                    <Route path="userId" element={<HomepageNavbar />}>
 
-                    <Route path="CustReturnOrder" element={<CustReturnOrder />}/>
+                        {/* <Route path="orders" element={<OrderView role = "manufacturer"/>}/> */}
+                        {/* <Route path="orders/:orderId" element={<OrderDetails/>}/> */}
+
+                        {/* <Route path="profile" element ={<Profile/>}/> */}
+
+                        {/* <Route path="orders" element={<OrderView userRole={userRole} />} />
+                        <Route path="orders/:orderId" element={<OrderDetails />} />
+                        <Route path="profile" element={<Profile />} /> */}
+
+                        {/* <Route path="*" element={<Error />} /> */}
+                        {/* </Route> */}
+                        {/* </Route> */}
+
+                        {/* <Route path="CustReturnOrder" element={<CustReturnOrder />}/>
                     <Route path="CustReturnedOrder" element={<CustReturnedOrder />}/>
                     <Route path="CustRejectOrder" element={<CustRejectOrder />}/>
                     <Route path="DistForwardedOrder" element={<DistForwardedOrder />}/>
                     <Route path="DistForwardOrder" element={<DistForwardOrder />}/>
-                    <Route path="DistIncomingOrder" element={<DistIncomingOrder />}/>
+                    <Route path="DistIncomingOrder" element={<DistIncomingOrder />}/> */}
 
 
-                    <Route path="/distributor">
+                        {/* <Route path="/distributor">
                         <Route path="userId" element={<HomepageNavbar />}>
                             <Route path="orders" element={<OrderView role = "distributor"/>}/>
                             <Route path="orders/forwarded/:orderId" element={<DistForwardOrder/>}/>
@@ -74,7 +86,7 @@ function App() {
                     </Route>
 
                     {/* for customer */}
-                    <Route path="/customer">
+                        {/* <Route path="/customer">
                         <Route path="userId" element={<HomepageNavbar />}>
                             <Route path="orders" element={<OrderView role = "customer"/>}/>
                             <Route path="orders/forwarded/:orderId" element={<CustRejectOrder/>}/> 
@@ -83,11 +95,22 @@ function App() {
                             <Route path="profile" element ={<Profile/>}/>
                             <Route path="*" element={<Error />}/>
                         </Route>
+                    </Route>  */}
+                        <Route path="create-order" element={<CreateOrder />} />
+                        <Route path="orders/*/:orderId" element={<Navigate replace to="orders/:orderId" />} />
+                        <Route path="orders" element={<OrderView userRole={userRole} />} />
+                        <Route path="orders/:orderId" element={<OrderDetails />} />
+                        <Route path="profile" element={<Profile />} />
+                        <Route path="*" element={<Error />} />
                     </Route>
-                                        
+
+                    {/* 
+                    <Route path="dist-inc-order" element={<DistIncomingOrder />} />
+                    <Route path="man-inc-order" element={<ManIncomingOrder />} /> */}
+
                     {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
                     {/* <Route path="*" element={<Error />}/> */}
-                    <Route path="*" element={<Error />}/>
+                    <Route path="*" element={<Error />} />
                 </Routes>
 
             </BrowserRouter>
