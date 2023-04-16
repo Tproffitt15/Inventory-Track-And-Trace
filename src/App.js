@@ -17,9 +17,12 @@ import OrderDetails from 'pages/OrderDetails';
 import DistIncomingOrder from 'pages/DistIncomingOrder';
 import DistForwardOrder from 'pages/DistForwardOrder';
 import DistForwardedOrder from 'pages/DistForwardedOrder';
+import ManIncomingOrder from 'pages/ManIncomingOrder';
 import CustIncomingOrder from 'pages/CustIncomingOrder';
 import CustRejectOrder from 'pages/CustRejectOrder';
 import CustReturnOrder from 'pages/CustReturnOrder';
+import CustRejectedOrder from 'pages/CustRejectedOrder';
+import CustReturnedOrder from 'pages/CustReturnedOrder';
 
 function App() {
     function getLibrary(provider) {
@@ -29,8 +32,16 @@ function App() {
         <Web3ReactProvider getLibrary={getLibrary}>
             <BrowserRouter>
                 <Routes>
-                    {/* <Route path="/signin" element={<Signin />} /> */}
-                    <Route path="/" element={<Signup />} />
+                    {/* Route placeholder */}
+                    {/* will later add nested routes for each role 
+                        example: distributor/:id/profile
+                                distributor/:id/all-orders
+                                etc.
+                    */}
+                    
+
+                                        {/* <Route path="/signin" element={<Signin />} /> */}
+                                        <Route path="/" element={<Signup />} />
                     <Route path="/connect" element={<ConnectWallet />} />
                     <Route path="/manufacturer">
                         <Route path="userId" element={<HomepageNavbar />}>
@@ -42,6 +53,14 @@ function App() {
                             <Route path="*" element={<Error />}/>
                         </Route>
                     </Route>
+
+                    <Route path="CustReturnOrder" element={<CustReturnOrder />}/>
+                    <Route path="CustReturnedOrder" element={<CustReturnedOrder />}/>
+                    <Route path="CustRejectOrder" element={<CustRejectOrder />}/>
+                    <Route path="DistForwardedOrder" element={<DistForwardedOrder />}/>
+                    <Route path="DistForwardOrder" element={<DistForwardOrder />}/>
+                    <Route path="DistIncomingOrder" element={<DistIncomingOrder />}/>
+
 
                     <Route path="/distributor">
                         <Route path="userId" element={<HomepageNavbar />}>

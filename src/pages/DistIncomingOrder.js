@@ -23,7 +23,7 @@ const DistIncomingOrder = () => {
 
     return (
         <div className="container">
-            <h1> Incoming Order From [Distributor]</h1>
+            <h1> Incoming Order From [Manufacturer]</h1>
             <div className={styles.content}>
                 <IncomingOrderTable orderData={orderData}/>
             </div>

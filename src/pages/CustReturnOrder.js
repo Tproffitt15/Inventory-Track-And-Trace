@@ -6,12 +6,25 @@ import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
 
+import IncomingOrderTable from "components/IncomingOrderTable";
+
 const CustReturnOrder = () => {
 
     const [drugs, setDrugs] = useState([]);
     const [selectedDrug, setSelectedDrug] = useState("");
     const [selectedDistributor, setSelectedDistributor] = useState("");
     const [selectedCustomer, setSelectedCustomer] = useState("");
+
+    const orderData = {
+        "order_number": 1,
+        "issue_date": "22/12/22",
+        "expected_date": "23/01/22",
+        "manufacturer": "Cardinal Health",
+        "customer": "Miami Uni",
+        "tracking_number": "12984791",
+        "tracking_URL": "tracking_URL.com",
+        "status": "completed"
+    };
 
     useEffect(() => {
         // Call the OpenFDA API to get the list of drugs
@@ -84,52 +97,9 @@ const CustReturnOrder = () => {
     return (
         <div className="container">
             <h1>Create A Return Order</h1>
-            <form onSubmit={handleFormSubmit}>
-                <div className={styles.formGroup}>
-                    <label htmlFor="drugSelect">Search for a drug</label>
-                    <Select
-                        id="drugSelect"
-                        class="form-control"
-                        options={drugOptions}
-                        value={selectedDrug}
-                        onChange={handleDrugChange}
-                        isSearchable={true}
-                    />
-                </div>
-
-                <div className={styles.formGroup}>
-                    <label htmlFor="distributorSelect">Choose distributor</label>
-                    <Select
-                        id="distributorSelect"
-                        class="form-control"
-                        options={partiesOptions}
-                        value={selectedDistributor}
-                        onChange={handleDistributorChange}
-                        isSearchable={true}
-                    />
-                </div>
-
-                <div className={styles.formGroup}>
-                    <label htmlFor="customerSelect">Choose customer</label>
-                    <Select
-                        id="customerSelect"
-                        class="form-control"
-                        options={partiesOptions}
-                        value={selectedCustomer}
-                        onChange={handleCustomerChange}
-                        isSearchable={true}
-                    />
-                </div>
-                <div className={styles.formGroup}>
-                    <label htmlFor="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" className="form-control" />
-                </div>
-
-                <div className={styles.formGroup}>
-                    <label htmlFor="deliveryDate">Deliver By</label>
-                    <input type="date" id="deliveryDate" name="deliveryDate" className="form-control" />
-                </div>
-            </form>
+            <div className={styles.content}>
+                <IncomingOrderTable orderData={orderData} />
+            </div>
             <div className={styles.buttonGroup}>
                 <button id="submitButton" className={styles.button}>Cancel</button>
                 <button type="submit" id="submitButton" className={styles.button}>Create Order</button>
