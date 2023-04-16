@@ -52,6 +52,7 @@ const OrdersView = ({ userRole }) => {
                     const response = await (await fetch(tokenURI)).json()
                     // console.log(response);
                     let item = {
+                        drug: response.drug,
                         orderId: parseInt(i.orderId.toString(), 10),
                         issueDate: response.issueDate,
                         expectedDate: response.expectedDate,

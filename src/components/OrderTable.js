@@ -34,7 +34,7 @@ function OrderTable({ filter, role, data }) {
 
     let navigate = useNavigate();
     const routeChange = (index) => {
-        navigate(`${index + 1}`);
+        navigate(`${index}`, { state: { data: dataArray, userRole: role } });
     }
 
     return (
@@ -51,7 +51,7 @@ function OrderTable({ filter, role, data }) {
             </thead>
             <tbody>
                 {filteredData.map((order) => (
-                    <tr key={order.orderId}>
+                    <tr key={order.orderId} onClick={() => routeChange(order.orderId)} >
                         <td>{order.orderId}</td>
                         <td>{order.issueDate}</td>
                         <td>{order.expectedDate}</td>
