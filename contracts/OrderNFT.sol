@@ -25,7 +25,7 @@ contract OrderNFT is ERC721 {
     struct Order {
         uint256 orderId;
         Status status;
-        address currentOwner;
+        // address currentOwner;
     }
 
     mapping(uint256 => string) private _tokenURIs;
@@ -44,7 +44,7 @@ contract OrderNFT is ERC721 {
         uint256 newOrderId = _orderIds.current();
 
         // Create new order struct
-        Order memory newOrder = Order(newOrderId, Status.ManufacturerShipped, msg.sender);
+        Order memory newOrder = Order(newOrderId, Status.ManufacturerShipped);
 
         // Save parties that involves in the transaction
         for (uint256 i = 0; i < addresses.length; i++) {
@@ -92,7 +92,8 @@ contract OrderNFT is ERC721 {
 
     function transferOwner(uint256 orderId, address to, Status _status) public {
         _orders[orderId].status = _status;
-        _transfer(_orders[orderId].currentOwner, to, orderId);
+        address currentOwner = ownerOf(orderId);
+        _transfer(currentOwner, to, orderId);
     }
 
     function _setTokenURI(uint256 tokenId, string memory _tokenURI)
