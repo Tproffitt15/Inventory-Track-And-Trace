@@ -66,30 +66,30 @@ const OrderDetails = () => {
             <div>
                 {/* Distributor see Manufacturer Shipped, which is an incoming order */}
                 {userRole === 1 && status === 0 && (
-                    <div>
-                        <li onClick={() => transferOwner(catchAllAddress, 3)} className="orderDetailsNavbarOption">Decline</li>
-                        <li onClick={() => transferOwner(distributorAddress, 1)} className="orderDetailsNavbarOption">Receive</li>
+                    <div className={styles.buttonGroup}>
+                        <button onClick={() => transferOwner(catchAllAddress, 3)} className={styles.button}>Decline</button>
+                        <button onClick={() => transferOwner(distributorAddress, 1)} className={styles.button}>Receive</button>
                     </div>
                 )}
                 {/* Distributor after received decide to cancel or forward order */}
                 {userRole === 1 && status === 1 && (
-                    <div>
-                        <li onClick={() => transferOwner()} className="orderDetailsNavbarOption">Cancel</li>
-                        <li onClick={() => transferOwner(distributorAddress, 2)} className="orderDetailsNavbarOption">Forward Order</li>
+                    <div className={styles.buttonGroup}>
+                        <button onClick={() => transferOwner()} className={styles.button}>Cancel</button>
+                        <button onClick={() => transferOwner(distributorAddress, 2)} className={styles.button}>Forward Order</button>
                     </div>
                 )}
                 {/* Customer see distributor forward choose to reject or complete */}
                 {userRole === 2 && status === 2 && (
-                    <div>
-                        <li onClick={() => transferOwner(catchAllAddress, 4)} className="orderDetailsNavbarOption">Reject</li>
-                        <li onClick={() => transferOwner(customerAddress, 5)} className="orderDetailsNavbarOption">Complete</li>
+                    <div className={styles.buttonGroup}>
+                        <button onClick={() => transferOwner(catchAllAddress, 4)} className={styles.button}>Reject</button>
+                        <button onClick={() => transferOwner(customerAddress, 5)} className={styles.button}>Complete</button>
                     </div>
                 )}
                 {/* Customer if reject will finish or return the order */}
                 {userRole === 2 && status === 4 && (
-                    <div>
-                        <li onClick={() => transferOwner()} className="orderDetailsNavbarOption">Finish</li>
-                        <li onClick={() => transferOwner(manufactureAddress, 6)} className="orderDetailsNavbarOption">Return Order</li>
+                    <div className={styles.buttonGroup}>
+                        <button onClick={() => transferOwner()} className={styles.button}>Finish</button>
+                        <button onClick={() => transferOwner(manufactureAddress, 6)} className={styles.button}>Return Order</button>
                     </div>
                 )}
             </div>
