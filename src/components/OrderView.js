@@ -92,23 +92,32 @@ const OrdersView = ({ userRole }) => {
             <div className={styles.orderNavbar}>
                 {userRole === 0 && (
                     <div className={styles.orderNavbarOptions}>
-                        <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
-                        <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">In-Progress Orders</li>
-                        <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Completed Orders</li>
+                        <button onClick={() => setSelectedOption(1)} className={`${styles.orderNavbarOption} ${selectedOption === 1 ? styles.active : ''}`}>All Orders</button>
+                        <button onClick={() => setSelectedOption(2)} className={`${styles.orderNavbarOption} ${selectedOption === 2 ? styles.active : ''}`}>In-Progress Orders</button>
+                        <button onClick={() => setSelectedOption(3)} className={`${styles.orderNavbarOption} ${selectedOption === 3 ? styles.active : ''}`}>Completed Orders</button>
+                        {/* <li onClick={() => setSelectedOption(1)} className={styles.orderNavbarOptions}>All Orders</li>
+                        <li onClick={() => setSelectedOption(2)} className={styles.orderNavbarOptions}>In-Progress Orders</li>
+                        <li onClick={() => setSelectedOption(3)} className={styles.orderNavbarOptions}>Completed Orders</li> */}
                     </div>
                 )}
                 {userRole === 1 && (
                     <div className={styles.orderNavbarOptions}>
-                        <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
-                        <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
-                        <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Forwarded Orders</li>
+                        <button onClick={() => setSelectedOption(1)} className={`${styles.orderNavbarOption} ${selectedOption === 1 ? styles.active : ''}`}>All Orders</button>
+                        <button onClick={() => setSelectedOption(2)} className={`${styles.orderNavbarOption} ${selectedOption === 2 ? styles.active : ''}`}>Incoming Orders</button>
+                        <button onClick={() => setSelectedOption(3)} className={`${styles.orderNavbarOption} ${selectedOption === 3 ? styles.active : ''}`}>Forwarded Orders</button>
+                        {/* <li onClick={() => setSelectedOption(1)} className={styles.orderNavbarOptions}>All Orders</li>
+                        <li onClick={() => setSelectedOption(2)} className={styles.orderNavbarOptions}>Incoming Orders</li>
+                        <li onClick={() => setSelectedOption(3)} className={styles.orderNavbarOptions}>Forwarded Orders</li> */}
                     </div>
                 )}
                 {userRole === 2 && (
                     <div className={styles.orderNavbarOptions}>
-                        <li onClick={() => setSelectedOption(1)} className="orderNavbarOption">All Orders</li>
-                        <li onClick={() => setSelectedOption(2)} className="orderNavbarOption">Incoming Orders</li>
-                        <li onClick={() => setSelectedOption(3)} className="orderNavbarOption">Return Orders</li>
+                        <button onClick={() => setSelectedOption(1)} className={`${styles.orderNavbarOption} ${selectedOption === 1 ? styles.active : ''}`}>All Orders</button>
+                        <button onClick={() => setSelectedOption(2)} className={`${styles.orderNavbarOption} ${selectedOption === 2 ? styles.active : ''}`}>Incoming Orders</button>
+                        <button onClick={() => setSelectedOption(3)} className={`${styles.orderNavbarOption} ${selectedOption === 3 ? styles.active : ''}`}>Return Orders</button>
+                        {/* <li onClick={() => setSelectedOption(1)} className={styles.orderNavbarOptions}>All Orders</li>
+                        <li onClick={() => setSelectedOption(2)} className={styles.orderNavbarOptions}>Incoming Orders</li>
+                        <li onClick={() => setSelectedOption(3)} className={styles.orderNavbarOptions}>Return Orders</li> */}
                     </div>
                 )}
                 {userRole === 0 ? (

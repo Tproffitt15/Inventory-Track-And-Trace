@@ -49,6 +49,22 @@ h1, h3 {
     text-align: left;
 }
 
+.button {
+    margin: 1%;
+    padding: 2%;
+    border: solid rgb(214, 214, 214);
+    border-radius: 20px 20px;
+    background-color: #B21B1B;
+    color: white;
+    font-size: 16px;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: right;
+    margin-right: 3%;
+}
+
 /* Styles for the orderNavbar when screen width is less than 768px */
 @media screen and (max-width: 768px) {
     .orderDetailNavbarOptions {
