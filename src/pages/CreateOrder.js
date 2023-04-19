@@ -6,8 +6,7 @@ import partiesData from "data/parties.json"
 import { uploadJSONToIPFS } from "../pinata";
 import OrderJSON from "../order.json";
 import { useWalletAddress } from 'hooks/useWalletAddress';
-
-// import { Modal, Spinner } from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 
 const CreateOrder = () => {
 
@@ -18,7 +17,10 @@ const CreateOrder = () => {
     const [showModal, setShowModal] = useState(false);
     const signerAddress = useWalletAddress();
     // const [pinataURL, setPinataURL] = useState("");
-
+    let navigate = useNavigate();
+    const routeChange = () => {
+        navigate("/userId/orders");
+    }
     useEffect(() => {
         // Call the OpenFDA API to get the list of drugs
         axios
@@ -133,7 +135,7 @@ const CreateOrder = () => {
         setShowModal(true);
         await mintOrderNFT(metadataURL, [distributor.value, customer.value]);
         setShowModal(false);
-
+        routeChange();
     };
 
 
@@ -200,10 +202,10 @@ const CreateOrder = () => {
             )} */}
 
             {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <div className="spinner"></div>
-                        <p className="loading-text">Please do not close or refresh the tab while your NFT is being minted...</p>
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <div className={styles.spinner}></div>
+                        <p className={styles.loadingText}>Please do not close or refresh the tab while your NFT is being minted...</p>
                     </div>
                 </div>
             )}

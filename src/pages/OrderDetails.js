@@ -3,6 +3,7 @@ import Status from "components/Status";
 import OrderJSON from "../order.json";
 import React, { useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import partiesData from "data/parties.json"
 import OrderDetailsTable from "components/OrderDetailTable";
 import ShippingInfo from "./ShippingInfo";
@@ -35,6 +36,11 @@ const OrderDetails = () => {
         }
     };
 
+    let navigate = useNavigate();
+    const routeChange = () => {
+        navigate("/userId");
+    }
+
     const transferOwner = async (newOwner, newStatus) => {
         try {
             const ethers = require("ethers");
@@ -46,6 +52,7 @@ const OrderDetails = () => {
             await contract.transferOwner(orderId, newOwner, newStatus);
 
             alert('Transfer Owner Success!');
+            routeChange();
         } catch (error) {
             console.log(error);
             alert('Transfer Owner Failed!')

@@ -53,49 +53,6 @@ function App() {
                     {/* <Route path="/manufacturer"> */}
                     <Route path="userId" element={<HomepageNavbar />}>
 
-                        {/* <Route path="orders" element={<OrderView role = "manufacturer"/>}/> */}
-                        {/* <Route path="orders/:orderId" element={<OrderDetails/>}/> */}
-
-                        {/* <Route path="profile" element ={<Profile/>}/> */}
-
-                        {/* <Route path="orders" element={<OrderView userRole={userRole} />} />
-                        <Route path="orders/:orderId" element={<OrderDetails />} />
-                        <Route path="profile" element={<Profile />} /> */}
-
-                        {/* <Route path="*" element={<Error />} /> */}
-                        {/* </Route> */}
-                        {/* </Route> */}
-
-                        {/* <Route path="CustReturnOrder" element={<CustReturnOrder />}/>
-                    <Route path="CustReturnedOrder" element={<CustReturnedOrder />}/>
-                    <Route path="CustRejectOrder" element={<CustRejectOrder />}/>
-                    <Route path="DistForwardedOrder" element={<DistForwardedOrder />}/>
-                    <Route path="DistForwardOrder" element={<DistForwardOrder />}/>
-                    <Route path="DistIncomingOrder" element={<DistIncomingOrder />}/> */}
-
-
-                        {/* <Route path="/distributor">
-                        <Route path="userId" element={<HomepageNavbar />}>
-                            <Route path="orders" element={<OrderView role = "distributor"/>}/>
-                            <Route path="orders/forwarded/:orderId" element={<DistForwardOrder/>}/>
-                            <Route path="orders/incoming/:orderId" element={<DistIncomingOrder/>}/>
-                            <Route path="orders/completed/:orderId" element={<DistForwardedOrder/>}/>
-                            <Route path="profile" element ={<Profile/>}/>
-                            <Route path="*" element={<Error />}/>
-                        </Route>
-                    </Route>
-
-                    {/* for customer */}
-                        {/* <Route path="/customer">
-                        <Route path="userId" element={<HomepageNavbar />}>
-                            <Route path="orders" element={<OrderView role = "customer"/>}/>
-                            <Route path="orders/forwarded/:orderId" element={<CustRejectOrder/>}/> 
-                            <Route path="orders/incoming/:orderId" element={<CustIncomingOrder/>}/>
-                            <Route path="orders/completed/:orderId" element={<CustReturnOrder/>}/>
-                            <Route path="profile" element ={<Profile/>}/>
-                            <Route path="*" element={<Error />}/>
-                        </Route>
-                    </Route>  */}
                         <Route path="create-order" element={<CreateOrder />} />
                         <Route path="orders/*/:orderId" element={<Navigate replace to="orders/:orderId" />} />
                         <Route path="orders" element={<OrderView userRole={userRole} />} />
@@ -104,12 +61,6 @@ function App() {
                         <Route path="*" element={<Error />} />
                     </Route>
 
-                    {/* 
-                    <Route path="dist-inc-order" element={<DistIncomingOrder />} />
-                    <Route path="man-inc-order" element={<ManIncomingOrder />} /> */}
-
-                    {/* <Route path="/order-tracking/" element={<OrderTracking />} /> */}
-                    {/* <Route path="*" element={<Error />}/> */}
                     <Route path="*" element={<Error />} />
                 </Routes>
 

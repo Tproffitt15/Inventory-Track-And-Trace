@@ -26,7 +26,7 @@ form {
   margin-right: 3%;
 }
 
-.loading-text {
+.loadingText {
   font-size: 1.2rem;
   color: #7988a3;
   margin-left: 0.5em;
@@ -43,7 +43,7 @@ form {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
+.modalContent {
   background-color: white;
   border-radius: 10px;
   padding: 20px;
