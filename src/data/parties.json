@@ -28,5 +28,10 @@
         "name": "CatchAll",
         "address": "0xf1999f4755F42A2f9D03DD33F6bc7F7D724c6F42",
         "role": 3
+    },
+    {
+        "name": "WillB",
+        "address": "0x8F2D1FC592f6f31A4D508ad3ca003CA7E590743A",
+        "role": 2
     }
 ]
