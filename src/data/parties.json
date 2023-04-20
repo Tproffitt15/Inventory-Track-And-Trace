@@ -33,5 +33,10 @@
         "name": "WillB",
         "address": "0x8F2D1FC592f6f31A4D508ad3ca003CA7E590743A",
         "role": 2
+    },
+    {
+        "name": "DuyN",
+        "address": "0xf9150493A5Dc14177b883D3f9da34F88D84B3E5B",
+        "role": 2
     }
 ]
