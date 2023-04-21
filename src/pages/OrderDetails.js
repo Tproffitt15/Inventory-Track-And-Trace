@@ -38,7 +38,7 @@ const OrderDetails = () => {
 
     let navigate = useNavigate();
     const routeChange = () => {
-        navigate("/userId");
+        navigate("/userId/orders");
     }
 
     const transferOwner = async (newOwner, newStatus) => {
